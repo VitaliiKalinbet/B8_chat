@@ -1,0 +1,22 @@
+{
+  "name": "prog_blog",
+  "version": "1.0.0",
+  "description": "project pog blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitaliiKalinbet/PROG_BLOG.git"
+  },
+  "author": "Bootcamp8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VitaliiKalinbet/PROG_BLOG/issues"
+  },
+  "homepage": "https://github.com/VitaliiKalinbet/PROG_BLOG#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
