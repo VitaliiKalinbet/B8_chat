@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Switch, Route, withRouter} from 'react-router-dom';
+// import { connect } from 'react-redux';
+import Chat from './Chat/Chat';
+import Register from './Register/Register';
+import Login from './Login/Login';
+import style from './App.module.css';
 
 class App extends Component {
+  state = {
+    isLoading: false,
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className={style.test}>
+        {/* this.props.isLoading ? Spinner подключить пока все не загрузится : */}
+       <Switch>
+         <Route exact path='/' component={Chat}/>
+         <Route path='/login' component={Login}/>
+         <Route path='/registration' component={Register}/>
+       </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
