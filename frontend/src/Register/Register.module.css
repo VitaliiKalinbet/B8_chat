@@ -1,0 +1,82 @@
+.generall{
+    background: #ffffff;
+     
+       display: flex
+    }
+    .bg{
+        background-image: url(../img/cutLogin.jpg);
+        width: 55%;
+        height: 735px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+    .left_com{
+        width: 26%;
+        margin-left: 11%;
+        padding-top: 10%;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+        /* width: 28%;
+        margin-left: 60%;
+        
+        padding-top: 30%; */
+        position: relative;
+    }
+    .emblema{
+        text-align: center;
+    }
+    
+    .item{
+        margin-bottom: 0.8rem;
+        padding: 1.3rem 4rem 1.4rem;
+        position: relative;
+    }
+    .item::after{
+        content: ""; /* Добавляемый текст */ 
+          background-color: #fc0; /* Цвет фона */ 
+          width:1.5rem;
+          height: 1.5rem;
+          position: absolute;
+            background-image: url(../img/baseline_lock_black_24dp.png);
+          padding: 2px;
+    }
+    .submit{
+      padding: 1.2rem 0 1.1rem;
+     background: #008ffd;
+     border: transparent;
+     border-radius:0.5rem; 
+     box-shadow: 2px 13px 37px -2px rgba(0,143,253,1);
+    margin-bottom: 4.3rem;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.4rem;
+    cursor: pointer;
+    }
+    .img{
+        width: 8rem;
+        height: 8rem;
+    }
+    .social{
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 100%;
+        left: 50%;
+     
+    
+    }
+    .supTitle{
+    margin-top: 4.8rem;
+    text-align: center;
+    color: #bac2c6;
+    font-size: 1rem;
+    }
+    .sup{
+        color:#008ffd;
+        font-size: 1rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    
