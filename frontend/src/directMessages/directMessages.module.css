@@ -1,0 +1,40 @@
+.directMessagesWrapper h4{
+    font-size: 1rem;
+    color: #fff;
+    width: 100%;
+    padding: .7rem 10%;
+    box-sizing: border-box;
+}
+
+.line {
+    border-top: 1px dashed #7b8aa4;
+    width: 80%;
+    margin: auto;
+}
+
+.directMessagesList {
+    width: 100%;
+    padding: 0 10% 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    list-style: none;
+    flex-direction: column;
+    cursor: pointer;
+    color: #fff;
+}
+
+.directMessagesItem {
+    padding: 0.2rem;
+    color: #7b8aa4;
+}
+
+.directMessagesItem:hover {
+    padding: 0.2rem;
+    background-color: #2b7ccd;
+    width: 100%;
+}
+
+.activeItem {
+    color: #fff;
+}

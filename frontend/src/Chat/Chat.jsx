@@ -1,9 +1,10 @@
 import React from 'react';
+import SidePanel from '../sidePanel/sidePanel';
 
 const Chat = () => {
     return (
         <div>
-            <h2>CHAT COMPONENT</h2>
+            <SidePanel/>
         </div>
     );
 };
