@@ -43,9 +43,8 @@ class DirectMessages extends Component {
         <h4>Direct Messages</h4>
         <div className={style.line}></div>
         <ul className={style.directMessagesList}>
-          {users.length > 0 && users.map(x => <li onClick={() => {this.changeDirectUser(x); this.props.setActiveItemId(x.id);}} 
-          className={style.directMessagesItem} key={x.id}>{`@ ${x.name}`}</li>)}
-
+          {users.length > 0 && users.map(x => <li onClick={() => {this.changeDirectUser(x)}} 
+          className={style.directMessagesItem} key={x.id}><i class="fa fa-circle" style={{color:'green'}}></i>{`  ${x.name}`}</li>)}
         </ul>
         
       </div>
