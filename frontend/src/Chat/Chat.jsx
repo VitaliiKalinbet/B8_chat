@@ -1,9 +1,10 @@
 import React from 'react';
+import LinkPanel from '../LinkPanel/LinkPanel.jsx'
 
 const Chat = () => {
     return (
         <div>
-            <h2>CHAT COMPONENT</h2>
+            <LinkPanel/>
         </div>
     );
 };
