@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import style from './Register.module.css'
 import {addEmail,addPassword}from '../redux/actions/emailAction'
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import git from '../img/GitHub.svg';
+import google from '../img/googleimg.svg';
+import lock from '../img/icons8-lock.svg';
+import email from  '../img/icons8-envelope-24.png'
  class Register extends Component {
   render() {
     return (
@@ -14,16 +18,18 @@ import {connect} from 'react-redux'
             <img src="../img/baseline_lock_black_24dp.png" alt=""/>
             
         <form className={style.form} action="">
+        <img className={style.item_img} src={email} alt="ds"/>
         <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={this.props.emailAdd} placeholder='Enter your email'/>
+        
         <input className={style.item} type="text" name="password" value={this.props.password} onChange={this.props.passwordAdd}placeholder='Enter your password'/>
-
+        <img className={style.item_imgTwo} src={lock} alt="rr"/>
         <input className={style.submit} type="submit" value="Login"/>
         <div className={style.social}>
-        <a href="#" className={style.img}><img  src="../img/gitcat.png" alt="git"/></a>
-        <a href="#" className={style.img}><img  src="../img/google+.png" alt="google"/></a>
+
+        <a href="#" className={style.img}><img className={style.img} src={git} alt="git"/></a>
         </div>
         </form>
-       <p className={style.supTitle}>Если вы зарегистрированы?<a href="/login"className={style.sup}>Логинизация</a></p>
+       <p className={style.supTitle}>If you are registered ?<a href="/login"className={style.sup}>Log in</a></p>
         </div>
         </div>
     )
