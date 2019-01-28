@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './LinkPanel.css';
+import style from './LinkPanel.module.css';
 import linkPanel_search from '../img/link_panelSearch.png'
 import linkPanel_figure from '../img/linkPanel_figure.png'
 import linkPanel_calendar from '../img/linkPanel_calendar.png'
@@ -35,24 +35,24 @@ class LinkPanel extends Component {
   render() {
     const {showModal, modalInputName, modalInputLink} = this.state
     return (
-      <div className="style.linkPanel_container">
+      <div className={style.linkPanel_container}>
         <div>
-          <ul>
+          {/* <ul>
             <li>{this.state.iconPack[0].urlGoogle}</li>
-          </ul>
-          <img className="style.link-panel_search" src={linkPanel_search} alt="search"/>
-          <img className="style.link-panel_line" src={linkPanel_figure} alt="figure"/>
-          <img className="style.link-panel_calendar" src={linkPanel_calendar} alt="calendar"/>
-          <img className="style.link-panel_line" src={linkPanel_figure} alt="figure"/>
-          <img className="style.link-panel_icons" src={linkPanel_icons} alt="icons"/>
-          <img className="style.link-panel_line" src={linkPanel_figure} alt="figure"/>
-          <img className="style.link-panel_icons" src={linkPanel_change} alt="change"/>
-          <img className="style.link-panel_line" src={linkPanel_figure} alt="figure"/>
-          <img className="style.link-panel_add" src={linkPanel_add} onClick={this.toggleModal} alt="add"/>
+          </ul> */}
+          <img className={style.panel_search} src={linkPanel_search} alt="search"/>
+          <img className={style.panel_line} src={linkPanel_figure} alt="figure"/>
+          <img className={style.panel_calendar} src={linkPanel_calendar} alt="calendar"/>
+          <img className={style.panel_line} src={linkPanel_figure} alt="figure"/>
+          <img className={style.panel_icons} src={linkPanel_icons} alt="icons"/>
+          <img className={style.panel_line} src={linkPanel_figure} alt="figure"/>
+          <img className={style.panel_icons} src={linkPanel_change} alt="change"/>
+          <img className={style.panel_line} src={linkPanel_figure} alt="figure"/>
+          <img className={style.panel_add} src={linkPanel_add} onClick={this.toggleModal} alt="add"/>
         </div>
         {showModal && <Modal toggleModal={this.toggleModal}>
-          <input className={style.modalInput} value={modalInputName}  onChange={this.handleChange} type="text" name='modalInputName' placeholder='Enter a channel name'/>
-          <input className={style.modalInput} value={modalInputLink} onChange={this.handleChange} type="text" name='modalInputLink' placeholder='Enter a channel description'/>
+          <input className={style.modalInput} value={modalInputName} type="text" placeholder='Enter a channel name'/>
+          <input className={style.modalInput} value={modalInputLink} type="text" placeholder='Enter a channel description'/>
         </Modal>}
       </div>
     );

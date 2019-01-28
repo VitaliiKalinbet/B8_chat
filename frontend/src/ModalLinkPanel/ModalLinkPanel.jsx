@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './ModalLinkPanel.css';
+import style from './ModalLinkPanel.module.css';
 
 const Modal = ({toggleModal, modalInputName, modalInputLink}) => {
     console.log(modalInputLink);
