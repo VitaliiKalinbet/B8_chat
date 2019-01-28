@@ -7,6 +7,7 @@ import linkPanel_icons from '../img/linkPanel_icon.png'
 import linkPanel_change from '../img/linkPanel_change.png'
 import linkPanel_add from '../img/linkPanel_add.png'
 import { FaGooglePlus , FaLinkedin } from 'react-icons/fa';
+import Modal from '../ModalLinkPanel/ModalLinkPanel';
 
 class LinkPanel extends Component {
   state = {
@@ -32,6 +33,7 @@ class LinkPanel extends Component {
   }
 
   render() {
+    const {showModal, modalInputName, modalInputLink} = this.state
     return (
       <div className="linkPanel_container">
         <div>
@@ -46,8 +48,9 @@ class LinkPanel extends Component {
           <img className="link-panel_line" src={linkPanel_figure} alt="figure"/>
           <img className="link-panel_icons" src={linkPanel_change} alt="change"/>
           <img className="link-panel_line" src={linkPanel_figure} alt="figure"/>
-          <img className="link-panel_add" src={linkPanel_add} alt="add"/>
+          <img className="link-panel_add" src={linkPanel_add} onClick={this.toggleModal} alt="add"/>
         </div>
+        <Modal toggleModal={this.toggleModal} modalInputName={modalInputName} modalInputLink={modalInputLink}/>
       </div>
     );
   }
