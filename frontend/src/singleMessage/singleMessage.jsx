@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import styles from './singleMessage.module.css';
 
-class singleMessage extends Component {
+class SingleMessage extends Component {
     render() {
         return (
             <div className={styles.oneMessage}>
-                <p>TEXT</p>
-            </div>
+                <div className={styles.header}>
+                    <div className={styles.container}>
+                        <div className={styles.wrapper}>
+                            <p>TEXT</p>
+                        </div>
+                    </div >
+                </div>
+            </div >
         );
     }
 }
 
-export default singleMessage;
+export default SingleMessage;

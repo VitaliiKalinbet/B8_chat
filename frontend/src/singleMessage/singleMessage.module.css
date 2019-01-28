@@ -1,5 +1,23 @@
 .oneMessage{
-    width: 85%;
+    width: 70%;
     height: auto;
-    background-color: blue;
+    background-color:#ffffff;
+    /* margin: auto; */
 }
+
+.container{
+    min-width: 320px;
+    max-width: 1340px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .wrapper{
+    width: 95%;
+    height: 70%;
+    border-radius: 2px;
+    box-shadow: -4px -4px 23px 12px rgba(160,160,160,0.42);
+    margin: auto;
+  }
