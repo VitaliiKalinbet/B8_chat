@@ -23,6 +23,14 @@ class LinkPanel extends Component {
     ]
   }
 
+  toggleModal = () => {
+    this.setState(prev => ({
+      showModal: !prev.showModal,
+      modalInputName: '',
+      modalInputLink: ''
+    }))
+  }
+
   render() {
     return (
       <div className="linkPanel_container">
