@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import style from './Register.module.css'
-import {addEmail,addPassword}from '../redux/actions/emailAction'
 import {connect} from 'react-redux';
 import git from '../img/GitHub.svg';
 import google from '../img/googleimg.svg';
 import lock from '../img/icons8-lock.svg';
 import email from  '../img/icons8-envelope-24.png'
+import {addEmail,addPassword,addName,addSurname,addTelephone}from '../redux/actions/emailAction'
  class Register extends Component {
   render() {
     return (
@@ -25,7 +25,11 @@ import email from  '../img/icons8-envelope-24.png'
         <img className={style.item_imgTwo} src={lock} alt="rr"/>
         <input className={style.submit} type="submit" value="Login"/>
         <div className={style.social}>
-
+        <input className={style.item} type="text" name="name" value={this.props.name} onChange={this.props.nameAdd}placeholder='Enter your name'/>
+        <input className={style.item} type="text" name="surname" value={this.props.surname} onChange={this.props.surnameAdd}placeholder='Enter your surname'/>
+        <input className={style.item} type="text" name="telephone" value={this.props.telephone} onChange={this.props.telephoneAdd}placeholder='Enter your telephone'/>
+        <input className={style.item} type="text" name="password" value={this.props.password} onChange={this.props.passwordAdd}placeholder='Enter your password'/>
+        <input className={style.submit} type="submit" value="Registration"/>
         <a href="#" className={style.img}><img className={style.img} src={git} alt="git"/></a>
         </div>
         </form>
@@ -35,10 +39,15 @@ import email from  '../img/icons8-envelope-24.png'
     )
   }
 }
+
 function mapStateToProps(state){
     return{
       email:state.email,
-      password:state.password
+      password:state.password,
+      name:state.name,
+      surname:state.surname,
+      telephone:state.telephone
+
     }
     
   }
@@ -52,7 +61,19 @@ function mapStateToProps(state){
         passwordAdd:function(ev){
           dispatch(addPassword(ev))
        
-        }
+        },
+        nameAdd:function(ev){
+          dispatch(addName(ev))
+       
+        },
+        surnameAdd:function(ev){
+          dispatch(addSurname(ev))
+       
+        },
+        telephoneAdd:function(ev){
+          dispatch(addTelephone(ev))
+       
+        },
     }
   }
 export default connect(mapStateToProps,mapDispatchToProps)  (Register)

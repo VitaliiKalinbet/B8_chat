@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import style from './Login.module.css';
 import {addEmail,addPassword}from '../redux/actions/emailAction';
-import {connect} from 'react-redux';
 import git from '../img/GitHub.svg';
 import google from '../img/googleimg.svg';
 import lock from '../img/icons8-lock.svg';
 import email from  '../img/icons8-envelope-24.png'
+import {connect} from 'react-redux'
 class Login extends Component {
 
 
