@@ -10,6 +10,9 @@ import { FaGooglePlus , FaLinkedin } from 'react-icons/fa';
 
 class LinkPanel extends Component {
   state = {
+    showModal:false,
+    modalInputName: '',
+    modalInputLink: '',
     iconPack:[
       {
         urlGoogle: <FaGooglePlus/>,
