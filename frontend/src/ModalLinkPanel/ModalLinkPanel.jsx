@@ -1,16 +1,16 @@
 import React from 'react';
 import style from './ModalLinkPanel.module.css';
 
-const Modal = ({toggleModal, modalInputName, modalInputLink}) => {
+const Modal = ({toggleModal, modalInputName, modalInputLink, imgActive, children}) => {
     console.log(modalInputLink);
     return (
-        <div className={style.modalBackdrop} onClick={e => e.target.className.includes('modalBackdrop')? toggleModal(): null}>
+        <div className={style.modalBackdrop} >
             <div className={style.modalWrapper} >
                 <div className={style.modalHeader}>
-                    <h2>{modalInputName}</h2>
+                    <h2>Fill in the fields</h2>
                 </div>
                 <div className={style.modalContent}>
-                    {modalInputLink}
+                {children}
                 </div>
                 <div className={style.modalFooter}>
                     <button className={`${style.btn} ${style.modalOkBtn}`}>Ok</button>
