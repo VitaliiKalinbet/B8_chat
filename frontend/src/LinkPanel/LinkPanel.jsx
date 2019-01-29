@@ -14,7 +14,7 @@ import { IconContext } from "react-icons";
 class LinkPanel extends Component {
   state = {
     showModal:false,
-    imgActive: false,
+    imgActive: '',
     links: [
       {
         linkName: 'Google search',//информация которую вводит юзер
@@ -38,25 +38,32 @@ class LinkPanel extends Component {
         id: 3,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaTrello/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaTrello/></IconContext.Provider>,
+        id: 4,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaGoogleDrive/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaGoogleDrive/></IconContext.Provider>,
+        id: 5,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaCalendarAlt/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaCalendarAlt/></IconContext.Provider>,
+        id: 6,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaEnvelope/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaEnvelope/></IconContext.Provider>,
+        id: 7,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><MdStar/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><MdStar/></IconContext.Provider>,
+        id: 8,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaMusic/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaMusic/></IconContext.Provider>,
+        id: 9,
       },
       {
-        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaFileImage/></IconContext.Provider>
+        url: <IconContext.Provider value={{ size: '1.5em', className: `${style.global}` }}><FaFileImage/></IconContext.Provider>,
+        id: 10,
       }
     ]
   }
@@ -75,9 +82,9 @@ class LinkPanel extends Component {
     });
   };
 
-  activeSvg = (e) => {
-    this.setState(prev => ({
-      imgActive: !prev.imgActive,
+  activeSvg = (x) => {
+    this.setState(({
+      imgActive: x,
     }))
   }
 
@@ -108,7 +115,7 @@ class LinkPanel extends Component {
         <input className={style.modalInput} value={modalInputLink} onChange={this.handleChange} type="text" name='modalInputLink' placeholder='Enter a icon link'/>
         <h4>Choose the icon:</h4>
         <ul className={style.card}>
-          {this.state.iconPack.map(el => <li onClick={this.activeSvg} key={el.id} className={imgActive ? `${style.svgLink}` : `${style.svgFalse}`}>{el.url}</li>)}
+          {this.state.iconPack.map(el => <li onClick={() => this.activeSvg(el.id)} key={el.id} className={imgActive === el.id? `${style.svgLink}` : `${style.svgFalse}`}>{el.url}</li>)}
         </ul>
       </Modal>}
       </div>
