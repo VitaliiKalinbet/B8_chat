@@ -1,6 +1,6 @@
 .main {
   background-color: #f9fafb;
-  width: 70%;
+  flex-basis: 70%;
 }
 .headerMain {
   width: 100%;
