@@ -34,14 +34,13 @@ import {NavLink} from 'react-router-dom';
             
         <form className={style.form} action="">
         <IconContext.Provider value={{color:'#dcdfe1' ,className:`${style.itemTree}`}}> <FaUserAlt />  </IconContext.Provider> 
-        <input className={style.item} type="text" name="name" value={this.props.name} onChange={ this.handelChange} placeholder='Enter username'/>
         <img className={style.item_img} src={email} alt="ds"/>
-        <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={ this.handelChange} placeholder='Enter  email'/>
+         <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={ this.handelChange} placeholder='Enter  email'/>
     
 
-        <input className={style.item} type="text" name="password" value={this.props.password} onChange={ this.handelChange}placeholder='Enter password'/>
+         <input className={style.item} type="text" name="password" value={this.props.password} onChange={ this.handelChange}placeholder='Enter password'/>
         <img className={style.item_imgTwo} src={lock} alt="rr"/>
-        <input className={style.item} type="text" name="passwordConfig" value={this.props.telephone} onChange={ this.handelChange}placeholder='Confirm password'/>
+         <input className={style.item} type="text" name="passwordConfig" value={this.props.telephone} onChange={ this.handelChange}placeholder='Confirm password'/>
         <img className={style.itemFour} src={lock} alt="rr"/>
         <input className={style.submit} type="submit" value="Registration"/>
       

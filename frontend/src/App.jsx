@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
 // import { connect } from 'react-redux';
 import Chat from './Chat/Chat';
-import Register from './Register/Register';
+import RegisterNew from './RegisterNew/RegisterNew';
 import Login from './Login/Login';
 import style from './App.module.css';
 
@@ -18,7 +18,7 @@ class App extends Component {
        <Switch>
          <Route exact path='/' component={Chat}/>
          <Route path='/login' component={Login}/>
-         <Route path='/registration' component={Register}/>
+         <Route path='/registration' component={RegisterNew}/>
        </Switch>
        
       </div>
