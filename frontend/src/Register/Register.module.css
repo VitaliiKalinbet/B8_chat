@@ -1,8 +1,6 @@
-
-/* @media (min-width: ) */
 .registration_page {
     background-image: url(../img/registration.jpg);
-    background-size: 60%;
+    background-size: 60% 100%; 
     background-repeat: no-repeat;
     height: 100vh;
     display: flex;
@@ -64,7 +62,12 @@
         padding: 1rem;
         font-size: 1rem;
         font-weight: 700;
+        box-shadow: 0px 3px 15px -1px rgba(31,140,250,0.5);
     }
+
+        .submit_btn:hover {
+            cursor: pointer;
+        }
 
     .subtitle {
         text-align: center;
@@ -79,3 +82,51 @@
             text-decoration: none;
             font-size: 1rem;
         }
+
+@media (max-width: 1023px) {
+
+    .form_place {
+        width: 35%;
+        margin-right: 0;
+    }
+    
+        .emblema {
+            font-size: 2rem;
+        }
+
+        .div_input {
+            padding: .7rem;
+        }
+      
+        .input {
+            font-size: .7rem;
+        }
+    
+            .input::placeholder {
+                font-size: .7rem;
+            }
+    
+        .submit_btn {
+            font-size: .7rem;
+        }
+    
+        .subtitle {
+            font-size: .7rem;
+        }
+    
+            .subtitle_navlink {
+                font-size: .7rem;
+            }
+}
+
+@media (max-width: 767px) {
+    .registration_page {
+        background: none;
+        padding: 2rem;
+    }
+    
+    .form_place {
+        width: 95%;
+        margin: auto;
+    }
+}
