@@ -1,5 +1,6 @@
 .main {
   background-color: #f9fafb;
+  width: 70%;
 }
 .headerMain {
   width: 100%;
@@ -44,13 +45,13 @@
   width: 95%;
   margin: auto;
   box-shadow: 2px 2px 7px 3px #f5f6f7;
-  padding-bottom: 2%;
+  padding: 2% 0;
   background-color: #fff;
 }
 .messagesArea {
-  height: 55vh;
+  height: 50vh;
   width: 92%;
-  margin: 3% auto;
+  margin: auto;
 }
 .messageForm {
   display: flex;
