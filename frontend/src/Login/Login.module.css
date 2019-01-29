@@ -140,13 +140,16 @@ background: #ffffff;
 }
 .emblema{
     text-align: center;
+    font-family: 'gotham_black'
 }
 
 .item{
     margin-bottom: 0.8rem;
-    padding: 1.3rem 4rem 1.4rem;
+    padding: 1.3rem 3.5rem 1.4rem;
     position: relative;
     font-family: 'Ubuntu_regular';
+    border-radius: 1rem;
+    font-size:1.5rem
 }
 .item::after{
     content: ""; /* Добавляемый текст */ 
@@ -163,13 +166,13 @@ background: #ffffff;
     z-index: 1;
 
     left: 6%;
-    top: 6%;
+    top: 8%;
 }
 .item_imgTwo{
     position: absolute;
   
     z-index: 1;
-    top: 32%;
+    top: 36%;
     left: 6%;
 }
 .submit{
@@ -183,6 +186,7 @@ color: #ffffff;
 font-weight: bold;
 font-size: 1.4rem;
 cursor: pointer;
+font-family: 'gotham_bold'
 }
 .social{
     position: absolute;
@@ -221,13 +225,30 @@ font-family: 'Ubuntu_bold';
         padding-top: 30%;        /* z-index: 2; */
         position: absolute;
     }
+    .item{
+        margin-bottom: 0.8rem;
+    padding: 1.3rem 3rem 1.4rem;
+    position: relative;
+    font-family: 'Ubuntu_regular';
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    }
+    .item_img{
+        left: 5%;
+        top: 7%;
+    
+    }
+    .item_imgTwo{
+        top: 34%;
+        left: 5%;
+    }
     
 }
 @media (min-width:768px)and (max-width:1024px){
     .bg{
     background-image: url(../img/cutLogin.jpg);
     width: 60%;
-    height: 26rem;
+    height: 30rem;
         background-size: cover;
     background-repeat: no-repeat;
     background-position: right;}
@@ -253,18 +274,15 @@ font-family: 'Ubuntu_bold';
         margin-bottom: 0.5rem;
         padding: 1rem 3rem 0.7rem;
         position: relative;
-        font-size: 0.7rem;
+        font-size: 1.7rem;
     }
     .item_img{
         left: 5%;
-        top: 5%;
+        top: 8%;
     
     }
     .item_imgTwo{
-        position: absolute;
-      
-        z-index: 1;
-        top: 26%;
+        top: 33%;
         left: 5%;
     }
 

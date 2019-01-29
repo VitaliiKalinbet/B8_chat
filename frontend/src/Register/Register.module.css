@@ -107,178 +107,223 @@
 
 
 
-
-
-
-
-
-
-
-
 .generall{
-    background: #ffffff;
-     
-       display: flex
-    }
+background: #ffffff;
+ 
+   display: flex
+}
+.bg{
+    background-image: url(../img/registration.jpg);
+    width: 55%;
+    height: 50rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.img{
+    widows: 36px;
+    height: 36px;
+}
+.left_com{
+    width: 26%;
+    margin-left: 11%;
+    padding-top: 10%;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    /* width: 28%;
+    margin-left: 60%;
+    
+    padding-top: 30%; */
+    position: relative;
+}
+.emblema{
+    text-align: center;
+    font-family: 'gotham_black'
+}
+
+.item{
+    margin-bottom: 0.8rem;
+    padding: 1.3rem 4rem 1.4rem;
+    position: relative;
+    font-family: 'Ubuntu_regular';
+    border-radius: 15px;
+    font-size: 1.3rem;
+}
+.item::after{
+    content: ""; /* Добавляемый текст */ 
+      background-color: #fc0; /* Цвет фона */ 
+      width:1.5rem;
+      height: 1.5rem;
+      position: absolute;
+        background-image: url(`${lock}`);
+      padding: 2px;
+}
+.item_img{
+    position: absolute;
+   
+    z-index: 1;
+
+    left: 7%;
+    top: 22.5%;
+
+}
+.item_imgTwo{
+    position: absolute;
+  
+   
+    z-index: 1;
+    top:40.5%;
+    left: 7%;
+}
+.itemTree{
+    position: absolute;
+    z-index: 1;
+    top: 6%;
+    left: 8%;
+}
+.itemFour{
+    position: absolute;
+    z-index: 1;
+    top: 58.5%;
+    left: 7%;
+
+}
+.submit{
+  padding: 1.2rem 0 1.1rem;
+ background: rgba(55,116,171,1);
+ border: transparent;
+ border-radius:0.5rem; 
+ box-shadow: 2px 13px 37px -2px rgba(0,143,253,1);
+margin-bottom: 4.5rem;
+color: #ffffff;
+font-weight: bold;
+font-size: 1.4rem;
+cursor: pointer;
+font-family: 'gotham_bold';
+}
+.social{
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 100%;
+    left: 50%;
+ 
+
+}
+.supTitle{
+margin-top: 4.8rem;
+text-align: center;
+color: #bac2c6;
+font-size: 1rem;
+font-family: 'Ubuntu_bold';
+}
+.sup{
+    color:rgba(55,116,171,1);
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+@media (min-width:320px)and (max-width:767px){
     .bg{
-        background-image: url(../img/cutLogin.jpg);
-        width: 55%;
-        height: 735px;
+        background-image: url(../img/regin_cosmonaft.png),rgba(55,116,171,1);;
+        width: 100%;
+        min-height: 100vh;
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: right;
+        background-position: center;
     }
-    .img{
-        widows: 36px;
-        height: 36px;
+    .item{
+        font-size: 20px;
+        padding: 0.5rem 3rem 0.5rem;
+    }
+    .item_img{
+        left: 7%;
+        top: 19.5%;
+    
+    }
+    .item_imgTwo{
+        top: 36%;
+        left: 7%;
+    }
+    .itemTree{
+        top: 4%;
+        left: 8%;
+    }
+    .itemFour{
+        top: 53%;
+        left: 7%;
+    }
+    .sup{
+        color:#273247;
+    }
+    .submit{
+       
+       background: #273247;
     }
     .left_com{
-        width: 26%;
+        width: 80%;
         margin-left: 11%;
-        padding-top: 10%;
+        padding-top: 30%;        /* z-index: 2; */
+        position: absolute;
+    }
+    
+}
+@media (min-width:768px)and (max-width:1024px){
+    .bg{
+    background-image: url(../img/registration.jpg),;
+    width: 60%;
+    height: 34rem;
+        background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;}
+    .left_com{
+        width: 40%;
+        margin-left: 4%;
+        margin-right: 7%;
+        padding-top: 1%;
+        
+    }
+    .img{
+        widows: 26px;
+        height: 26px;
     }
     .form{
         display: flex;
         flex-direction: column;
-        /* width: 28%;
-        margin-left: 60%;
-        
-        padding-top: 30%; */
+        width: 80%;
+        margin: auto;
         position: relative;
     }
-    .emblema{
-        text-align: center;
-        font-family: 'gotham_black';
-    }
-    
     .item{
-        margin-bottom: 0.8rem;
-        padding: 1.3rem 4rem 1.4rem;
+        margin-bottom: 0.5rem;
+        padding: 1rem 3rem 0.7rem;
         position: relative;
-        font-family: 'Ubuntu_regular';
-    }
-    .item::after{
-        content: ""; /* Добавляемый текст */ 
-          background-color: #fc0; /* Цвет фона */ 
-          width:1.5rem;
-          height: 1.5rem;
-          position: absolute;
-            background-image: url(`${lock}`);
-          padding: 2px;
+        font-size: 1rem;
+       
     }
     .item_img{
-        position: absolute;
-       
-        z-index: 1;
-    
         left: 6%;
-        top: 6%;
+        top: 20%;
     }
     .item_imgTwo{
         position: absolute;
       
         z-index: 1;
-        top: 32%;
-        left: 6%;
+        top: 35%;
+        left: 5%;
     }
-    .submit{
-      padding: 1.2rem 0 1.1rem;
-     background: #008ffd;
-     border: transparent;
-     border-radius:0.5rem; 
-     box-shadow: 2px 13px 37px -2px rgba(0,143,253,1);
-    margin-bottom: 4.5rem;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 1.4rem;
-    cursor: pointer;
-    font-family: 'gotham_bold';
-    }
-    .img{
-        width: 8rem;
-        height: 8rem;
-    }
-    .social{
-        position: absolute;
-        transform: translate(-50%,-50%);
-        top: 100%;
-        left: 50%;
+    .item_imgTwo{
      
+        left: 7%;
+    }
+    .itemFour{
+        top: 51%;
     
     }
-    .supTitle{
-    margin-top: 4.8rem;
-    text-align: center;
-    color: #bac2c6;
-    font-size: 1rem;
-    font-family: 'Ubuntu_bold';
-    }
-    .sup{
-        color:#008ffd;
-        font-size: 1rem;
-        font-weight: bold;
-        text-decoration: none;
-    }
-    @media (min-width:320px)and (max-width:767px){
-        .bg{
-            background-image: url(../img/login_regis_Pole.png);
-            width: 100%;
-                    min-height: 100vh;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: right;
-        }
-        .left_com{
-            width: 80%;
-            margin-left: 11%;
-            padding-top: 30%;            /* z-index: 2; */
-            position: absolute;
-        }
-        
-    }
-    @media (min-width:768px)and (max-width:1024px){
-        .bg{
-        background-image: url(../img/cutLogin.jpg);
-        width: 60%;
-        height: 26rem;
-            background-size: cover;
-        background-repeat: no-repeat;
-        background-position: right;}
-        .left_com{
-            width: 40%;
-            margin-left: 4%;
-            margin-right: 7%;
-            padding-top: 1%;
-            
-        }
-        .img{
-            widows: 26px;
-            height: 26px;
-        }
-        .form{
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            margin: auto;
-            position: relative;
-        }
-        .item{
-            margin-bottom: 0.5rem;
-            padding: 1rem 3rem 0.7rem;
-            position: relative;
-            font-size: 0.7rem;
-        }
-        .item_img{
-            left: 5%;
-            top: 5%;
-        
-        }
-        .item_imgTwo{
-            position: absolute;
-          
-            z-index: 1;
-            top: 26%;
-            left: 5%;
-        }
-    
-    }    
+    .img {
+        widows: 36px;
+        height: 36px;
+}
+}

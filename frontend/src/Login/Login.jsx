@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import style from './Login.module.css';
-import {addEmail,addPassword}from '../redux/actions/emailAction';
+
 import git from '../img/GitHub.svg';
-import google from '../img/googleimg.svg';
+import {NavLink} from 'react-router-dom';
 import lock from '../img/icons8-lock.svg';
 import email from  '../img/icons8-envelope-24.png'
-import {connect} from 'react-redux'
-class Login extends Component {
 
+class Login extends Component {
+  state={
+    
+    password:'',
+   
+    email:'',
+  }
+  handelChange=(ev)=>{
+    let change=ev.target.name;
+    let value=ev.target.value;
+    this.setState({  
+      [change]:value
+    })
+   
+  }
 
   render() {
     return (
@@ -22,9 +35,9 @@ class Login extends Component {
             
         <form className={style.form} action="">
         <img className={style.item_img} src={email} alt="ds"/>
-        <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={this.props.emailAdd} placeholder='Enter your email'/>
+        <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter your email'/>
         
-        <input className={style.item} type="text" name="password" value={this.props.password} onChange={this.props.passwordAdd}placeholder='Enter your password'/>
+        <input className={style.item} type="text" name="password" value={this.props.password} onChange={this.handelChange}placeholder='Enter your password'/>
         <img className={style.item_imgTwo} src={lock} alt="rr"/>
         <input className={style.submit} type="submit" value="Login"/>
         <div className={style.social}>
@@ -33,30 +46,11 @@ class Login extends Component {
       
         </div>
         </form>
-       <p className={style.supTitle}>Not with us yet? <a href="/registration"className={style.sup}>Registration</a></p>
+       <p className={style.supTitle}>Not with us yet? <NavLink className={style.sup} to='/registration' >Registration</NavLink></p>
         </div>
         </div>
     )
   }
 }
-function mapStateToProps(state){
-    return{
-      email:state.email,
-      password:state.password
-    }
-    
-  }
-  function mapDispatchToProps(dispatch){
-    return{
-      emailAdd:function(ev){
-        dispatch(addEmail(ev))
-     
-      },
-      
-        passwordAdd:function(ev){
-          dispatch(addPassword(ev))
-       
-        }
-    }
-  }
-export default connect(mapStateToProps,mapDispatchToProps) ( Login);
+
+export default  Login;
