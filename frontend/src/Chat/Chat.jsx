@@ -1,9 +1,10 @@
 import React from 'react';
+import Messages from '../Messages/Messages';
 
 const Chat = () => {
     return (
         <div>
-            <h2>CHAT COMPONENT</h2>
+            <Messages/>
         </div>
     );
 };
