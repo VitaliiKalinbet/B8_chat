@@ -1,56 +1,53 @@
 import React, { Component } from 'react';
 import style from './Login.module.css';
+import { FaEnvelope, FaUnlockAlt } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
-import git from '../img/GitHub.svg';
-import {NavLink} from 'react-router-dom';
-import lock from '../img/icons8-lock.svg';
-import email from  '../img/icons8-envelope-24.png'
+class Register extends Component {
 
-class Login extends Component {
-  state={
-    
-    password:'',
-   
-    email:'',
+  state = {
+    email: '',
+    password: '',
   }
-  handelChange=(ev)=>{
-    let change=ev.target.name;
-    let value=ev.target.value;
-    this.setState({  
-      [change]:value
+
+  handelChange = (e) => {
+    let change = e.target.name;
+    let value = e.target.value;
+    this.setState({
+      [change]: value
     })
-   
   }
 
   render() {
     return (
+      <div className={style.registration_page}>
 
+          <div className={style.form_place}>
+              <h2 className={style.emblema}>B8 chat</h2>
 
-<div className={style.generall}>
-     <div className={style.bg}></div>
-            
-            <div className={style.left_com}>
-            <h2 className={style.emblema}>LOGIN COMPONENT</h2>
-       
-            
-        <form className={style.form} action="">
-        <img className={style.item_img} src={email} alt="ds"/>
-        <input className={style.item} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter your email'/>
-        
-        <input className={style.item} type="text" name="password" value={this.props.password} onChange={this.handelChange}placeholder='Enter your password'/>
-        <img className={style.item_imgTwo} src={lock} alt="rr"/>
-        <input className={style.submit} type="submit" value="Login"/>
-        <div className={style.social}>
-     
-        <a href="#" className={style.img}><img className={style.img} src={git} alt="git"/></a>
-      
+              <form className={style.form} action="">
+
+                <div className={style.div_input}>
+                  <FaEnvelope className={style.icon_input}/>
+                  <input className={style.input} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter  email' />
+                </div>
+
+                <div className={style.div_input}>
+                  <FaUnlockAlt className={style.icon_input}/>
+                  <input className={style.input} type="text" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' />
+                </div>
+                                   
+                <input className={style.submit_btn} type="submit" value="Log in" />
+
+              </form>
+
+              <p className={style.subtitle}>Don't have an account ?        <NavLink className={style.subtitle_navlink} to='/registration' >Registration</NavLink>
+              </p>
         </div>
-        </form>
-       <p className={style.supTitle}>Not with us yet? <NavLink className={style.sup} to='/registration' >Registration</NavLink></p>
-        </div>
-        </div>
+
+      </div>
     )
   }
 }
 
-export default  Login;
+export default Register;
