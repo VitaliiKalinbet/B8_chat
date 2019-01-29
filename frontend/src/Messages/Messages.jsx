@@ -73,7 +73,7 @@ class Messages extends Component {
     return (
       <div className={style.main}>
         <div className={style.headerMain}>
-          <FaBars className={style.additionalButton}/>
+          <FaBars onClick={this.props.showSidePanel} className={style.additionalButton}/>
           <div className={style.header}>
             <div className={style.headerName}>
               <h2 className={style.name}>B8 chat</h2>
@@ -84,7 +84,7 @@ class Messages extends Component {
               <input name='search' type="text" placeholder='Search...' className={style.search} value={this.state.search} onChange={this.handlerChange} />
             </form>
           </div>
-          <FaChevronCircleLeft className={style.additionalButton}/>
+          <FaChevronCircleLeft onClick={this.props.showLinkPanel} className={style.additionalButton}/>
         </div>
         <div className={style.messages}>
           <div className={style.messagesArea}>

@@ -19,7 +19,7 @@ export default class SidePanel extends Component {
 
   render() {
     return (
-      <div className={style.sidePanel}>
+      <div className={true ? style.sidePanel : style.sidePanelNone}>
         <UserPanel/>
         <Channels setActiveItemId = {this.setActiveItemId} getActiveItemId = {this.getActiveItemId}/>
         <DirectMessages setActiveItemId = {this.setActiveItemId} getActiveItemId = {this.getActiveItemId}/>

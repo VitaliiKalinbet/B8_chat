@@ -1,3 +1,6 @@
 .chat {
   display: flex;
 }
+.none {
+  display: none;
+}

@@ -93,3 +93,15 @@
     cursor: pointer;
   }
 
+@media (max-width: 767px) {
+  .linkPanel_container{
+    min-height: 100vh;
+    position: absolute;
+    width: 40%;
+    top: 0;
+    right: 0;
+  }
+  .linkPanel_container_none {
+    display: none;
+  }
+}

@@ -29,7 +29,7 @@
     }
     .members {
       color: #bac4c9;
-      font-size: 15px;
+      font-size: 1rem;
     }
     .headerForm {
       display: flex;
@@ -48,7 +48,7 @@
     .search::placeholder {
       color: #bac4c9;
       font-style: italic;
-      font-size: 15px;
+      font-size: 1rem;
     }
 
   .messages {
@@ -85,7 +85,7 @@
     .messageInput::placeholder {
       color: #bac4c9;
       font-style: italic;
-      font-size: 15px;
+      font-size: 1rem;
     }
     .smile {
       color: #bac4c9;
@@ -103,5 +103,37 @@
 @media (max-width: 1023px) {
   .name {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    width: 100%;
+  }
+  .header {
+    width: 50%;
+    padding: 0;
+  }
+    .headerForm {
+      width: 60%;
+    }
+    .name {
+      font-size: 0.7rem;
+    }
+    .members {
+      color: #bac4c9;
+      font-size: .7rem;
+    }
+    .messageInput::placeholder {
+      font-size: 0.5rem;
+    }
+    .search {
+      width: 80%;
+    }
+  .additionalButton {
+    display: block;
+    margin: 1rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 }

@@ -12,3 +12,16 @@
     padding: 0;
     margin: 0;
 }
+
+@media (max-width: 767px) {
+    .sidePanel {
+        min-height: 100vh;
+        position: absolute;
+        width: 70%;
+        top: 0;
+        left: 0;
+    }
+    .sidePanelNone {
+        display: none;
+    }
+}
