@@ -33,8 +33,19 @@
     padding: 0.2rem;
     background-color: #2b7ccd;
     width: 100%;
+    color: white;
 }
 
 .activeItem {
     color: #fff;
+}
+
+@media (max-width: 1023px) {
+    .directMessagesWrapper h4{
+        font-size: .7rem;
+    }
+
+    .directMessagesItem {
+        font-size: .7rem;
+    }
 }

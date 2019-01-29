@@ -2,9 +2,9 @@
     background-color: #273247;
     margin: 0;
     padding: 0;
-    flex-basis: 15%;
+    /* flex-basis: 15%; */
+    width: 20%;
     height: 100vh;
-    min-width: 20rem;
     box-sizing: border-box;
 }
 
