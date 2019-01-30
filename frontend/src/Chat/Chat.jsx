@@ -41,14 +41,6 @@ class Chat extends Component {
         return (
             <div className={style.chat}>
 
-                {/* <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.wraperSidePanel}>
-                    <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
-                </div>
-                <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
-                <div className={style.wraperLinkPanel}>
-                    <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel}/>
-                </div> */}
-
                 <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
                 <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.divCloseSidePanel}></div>
 

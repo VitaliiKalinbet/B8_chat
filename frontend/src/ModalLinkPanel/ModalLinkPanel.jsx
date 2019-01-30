@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './ModalLinkPanel.module.css';
 
-const Modal = ({toggleModal, modalInputName, modalInputLink, imgActive, children}) => {
+const Modal = ({changeFunction, modalInputName, modalInputLink, imgActive, children, toggleModal}) => {
     console.log(modalInputLink);
     return (
         <div className={style.modalBackdrop} >
@@ -13,8 +13,8 @@ const Modal = ({toggleModal, modalInputName, modalInputLink, imgActive, children
                 {children}
                 </div>
                 <div className={style.modalFooter}>
-                    <button className={`${style.btn} ${style.modalOkBtn}`}>Ok</button>
-                    <button className={`${style.btn} ${style.modalCancelBtn}`} onClick={toggleModal}>Cancel</button>
+                    <button onClick={changeFunction} className={`${style.btn} ${style.modalOkBtn}`}>Ok</button>
+                    <button onClick={toggleModal} className={`${style.btn} ${style.modalCancelBtn}`} >Cancel</button>
                 </div>
             </div>
         </div>

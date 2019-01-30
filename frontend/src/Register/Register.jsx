@@ -10,6 +10,7 @@ class Register extends Component {
     email: '',
     password: '',
     passwordConfirm: '',
+    errors: [],
   }
 
   handelChange = (e) => {
@@ -18,6 +19,30 @@ class Register extends Component {
     this.setState({
       [change]: value
     })
+  }
+
+  isPasswordValid = ({password, passwordConfirm}) => {
+    return password === passwordConfirm;
+  }
+
+  isFormValid = (e) => {
+    e.preventDefault();
+    let errors = [];
+    let error;
+    if(!this.isPasswordValid(this.state)){
+      error = {
+        message: 'Password is invalid'
+      };
+      this.setState({
+        errors: errors.concat(error)
+      })
+      return false;
+    } else {
+      this.setState({
+        errors: []
+      })
+      return true
+    }
   }
 
   render() {
@@ -49,12 +74,18 @@ class Register extends Component {
                   <input className={style.input} type="text" name="passwordConfirm" value={this.props.telephone} onChange={this.handelChange} placeholder='Confirm password' />
                 </div>
                   
-                <input className={style.submit_btn} type="submit" value="Registration" />
+                <input onClick={this.isFormValid} className={style.submit_btn} type="submit" value="Registration" />
 
               </form>
 
               <p className={style.subtitle}>If you have an account ?        <NavLink className={style.subtitle_navlink} to='/login' >Log   in</NavLink>
               </p>
+
+              {this.state.errors.length > 0 && (
+                <p className={style.error}>
+                  {this.state.errors.map(el => <p key={el.message}>{el.message}</p>)}
+                </p>
+              )}
         </div>
 
       </div>

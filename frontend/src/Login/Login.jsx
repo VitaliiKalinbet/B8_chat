@@ -8,6 +8,7 @@ class Register extends Component {
   state = {
     email: '',
     password: '',
+    errors: [{message: 'Server error!!!'}],
   }
 
   handelChange = (e) => {
@@ -25,16 +26,16 @@ class Register extends Component {
           <div className={style.form_place}>
               <h2 className={style.emblema}>B8 chat</h2>
 
-              <form className={style.form} action="">
+              <form className={style.form}>
 
                 <div className={style.div_input}>
                   <FaEnvelope className={style.icon_input}/>
-                  <input className={style.input} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter  email' />
+                  <input required className={style.input} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter  email' />
                 </div>
 
                 <div className={style.div_input}>
                   <FaUnlockAlt className={style.icon_input}/>
-                  <input className={style.input} type="text" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' />
+                  <input required className={style.input} type="password" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' />
                 </div>
                                    
                 <input className={style.submit_btn} type="submit" value="Log in" />
@@ -43,8 +44,14 @@ class Register extends Component {
 
               <p className={style.subtitle}>Don't have an account ?        <NavLink className={style.subtitle_navlink} to='/registration' >Registration</NavLink>
               </p>
-        </div>
 
+              {this.state.errors.length > 0 && (
+                <p className={style.error}>
+                  {this.state.errors.map(el => <p key={el.message}>{el.message}</p>)}
+                </p>
+              )}
+
+        </div>
       </div>
     )
   }

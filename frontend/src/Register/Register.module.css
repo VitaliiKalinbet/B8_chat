@@ -82,6 +82,14 @@
             text-decoration: none;
             font-size: 1rem;
         }
+    
+    .error {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 1rem;
+        color: rgb(212, 25, 25);
+        font-weight: bold;
+    }
 
 @media (max-width: 1023px) {
 
