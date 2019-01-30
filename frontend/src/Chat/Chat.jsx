@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 import style2 from '../App.module.css';
 
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 class Chat extends Component {
 
@@ -24,7 +25,7 @@ class Chat extends Component {
     }
 
     closeSidePanel = (e) => {
-        console.log('works closeSidePanel');
+        // console.log('works closeSidePanel');
         this.setState({
             toggleSidePanel: false,
         })
@@ -54,7 +55,6 @@ class Chat extends Component {
        
     }
 
-   
     render() {
         const { isLoading } = this.state
 
@@ -107,4 +107,5 @@ function MDTP (dispatch) {
   }
 }
 
-export default connect(MSTP, MDTP) (Chat)
+export default withRouter(connect(MSTP, MDTP)(Chat));
+

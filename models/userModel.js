@@ -3,12 +3,13 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const LinkSchema = require('./linkModel')
 
+
 const userSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     message: {},
-    avatar: Buffer,
+    avatar: String,
     links: [LinkSchema],
     addAt: { type: Date, default: Date.now}
 }, {

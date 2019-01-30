@@ -211,7 +211,7 @@ module.exports = io => {
                     })
                     User.findOne({_id: obj.id}).lean().exec(function(err,user) {
                         if (err) throw err;
-                        console.log('aaa')
+                        // console.log('aaa')
                         client.emit("user-avatar-was-edited", user)
                     })
                 }  

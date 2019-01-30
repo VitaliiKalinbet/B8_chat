@@ -117,6 +117,12 @@ class App extends Component {
         password: this.state.password,
         email: this.state.email,
         avatar: `http://gravatar.com/avatar/${md5(this.state.user)}?d=identicon`,
+        links: [{
+            linkName: 'Google search',
+            url: 'https://www.google.com/webhp',
+            iconName: 'FaGoogle',
+            linkId: uuidv4()
+        }]
         }
       window.socket.emit('registration', user)
     } else {
@@ -181,6 +187,7 @@ class App extends Component {
           online: online,
         })
     })
+
     window.socket.on("get-user-name", (usersOnline) => {
       this.setState({
         usersOnline: usersOnline
@@ -229,10 +236,10 @@ class App extends Component {
 
         let objUser = {}
           if (message.currentUser.avatar) {
-            console.log('exist')
+            // console.log('exist')
             objUser = {...message.currentUser, avatar:`data:image/jpeg;base64,${message.currentUser.avatar}`}
           } else {
-            console.log('noooooo exist')
+            // console.log('noooooo exist')
             objUser = message.currentUser
           }
 
@@ -261,7 +268,6 @@ class App extends Component {
     window.socket.on('user-avatar-was-edited', (obj) => {
       // console.log('Its obj!!', obj)
       let newObj = {...obj, avatar:`data:image/jpeg;base64,${obj.avatar}`}
-      // console.log(gg)
       this.setState({
         currentUser: newObj,
       })

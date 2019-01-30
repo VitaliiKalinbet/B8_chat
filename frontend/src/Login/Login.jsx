@@ -27,12 +27,10 @@ class Login extends Component {
     window.socket.emit('login', user)
   }
 
- 
-
   render() {
 
     {this.props.clearInput && this.setState({email: '', password: ''})}
-    
+
     return (
       <div className={style.registration_page}>
 

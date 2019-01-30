@@ -19,19 +19,19 @@ export default class Main extends Component {
     }))
   }
 
-addFile = e => {
-    const file = e.target.files[0]
-    console.log(file)
-    if (file) {
-        this.setState({
-            file
-        })
+    addFile = e => {
+        const file = e.target.files[0]
+        console.log(file)
+        if (file) {
+            this.setState({
+                file
+            })
+        }
     }
-}
 
-uploadFile = (file, metadata) => {
-    console.log(file, metadata)
-}
+    uploadFile = (file, metadata) => {
+        console.log(file, metadata)
+    }
 
 // isFileTypeCorrect = fileName => this.state.correctType.includes(mime.lookup(fileName))
 

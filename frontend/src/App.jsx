@@ -8,8 +8,8 @@ import Login from './Login/Login';
 // import style from './App.module.css';
 
 import {connect} from 'react-redux';
-import {setAllChannels, removeAllChannels, updateAllChannels} from './redux/actions/allChannelsAction';
-import {setAllUsers, removeAllUsers,updateAllUsers} from './redux/actions/allUsersAction';
+import {setAllChannels} from './redux/actions/allChannelsAction';
+import {setAllUsers} from './redux/actions/allUsersAction';
 import {setCurrentChannel} from './redux/actions/currentChannelAction';
 import {setCurrentUser} from './redux/actions/currentUserAction';
 
@@ -25,6 +25,7 @@ class App extends Component {
   state = {
     clientId: '',
     clearInput: false,
+    error: '',
   }
 
   componentDidMount() {
@@ -43,90 +44,59 @@ class App extends Component {
     })
 
     window.socket.on('login-on-DB', (data) => {
+      if (data.message === 'User login success') {
+      this.props.history.push('/')
+      this.setDataToRedux(data)
+        } else {
+          this.setState({
+            error: data.message,
+          })
+        }
+      })
 
-    if (data.message === 'User login success') {
-        
-     this.props.history.push('/')
+      window.socket.on('registration-on-DB', (data) => {
+        if(data.message === 'User created') {
+          this.props.history.push('/')
+          this.setDataToRedux(data)
+        } else {
+          this.setState({
+            error: data.message,
+          })
+        }
+      })
 
-     setTimeout(() => this.setDataToRedux(data), 6)
-        // console.log(data)
-        // let objUser = {}
-        //   if (data.currentUser.avatar) {
-        //     // console.log('exist')
-        //     objUser = {...data.currentUser, avatar:`data:image/jpeg;base64,${data.currentUser.avatar}`}
-        //   } else {
-        //     // console.log('noooooo exist')
-        //     objUser =data.currentUser
-        //   }
-        //   // console.log(objUser)
-        // let arrUsers = data.allUsers.map(el => el.avatar ? ({...el, avatar:`data:image/jpeg;base64,${el.avatar}`}) : el)
-        // let currentChannel = data.allChannels.find(el => el.channelName === 'General')
+      window.socket.on('user-avatar-was-edited', (obj) => {
+        // console.log('Its obj!!', obj)
+        this.props.setCurrentUser(obj)
+      })
 
-        // this.props.setAllChannels(data.allChannels)
-        // this.props.setAllUsers(arrUsers)
-        // this.props.setCurrentChannel(currentChannel)
-        // this.props.setCurrentUser(objUser)
-
-        // this.changeState()
       
-      
-      //   this.setState({          
-      //     currentUser: objUser,
-      //     // user: message.currentUser.username,
-      //     error: '',
-      //     email: '',
-      //     password: '',
-      //     allUsers: arrUsers, 
-      //     channels: data.allChannels,
-      //     online: data.online,
-      //     // usersOnline: usersOnline,
-      //     clientId: data.clientId,
-      //     currentChannel: data.allChannels.find(el => el.channelName === 'General'),
-      //     clearInput: true,
-      //   })
-      } else {
-        this.setState({
-          error: data.message,
-        })
-      }
-    })
   }
 
   setDataToRedux = async(data) => {
-    let objUser = {}
-    if (data.currentUser.avatar) {
-      // console.log('exist')
-      objUser = {...data.currentUser, avatar:`data:image/jpeg;base64,${data.currentUser.avatar}`}
-    } else {
-      // console.log('noooooo exist')
-      objUser =data.currentUser
-    }
+    let currentUser = data.currentUser
+  
     let arrUsers = data.allUsers.map(el => el.avatar ? ({...el, avatar:`data:image/jpeg;base64,${el.avatar}`}) : el)
+
     let currentChannel = data.allChannels.find(el => el.channelName === 'General')
 
     await this.props.setAllChannels(data.allChannels)
     await this.props.setAllUsers(arrUsers)
     await this.props.setCurrentChannel(currentChannel)
-    await this.props.setCurrentUser(objUser)
+    await this.props.setCurrentUser(currentUser)
 
-    // this.setState({
-    //       clearInput: true,
-    //     })
+    this.setState({
+      error: '',
+    })
   }
 
   render() {
     return (
-      // <div>
        <Switch>
          <Route exact path='/' render={(props) => <Chat {...props} clearInput={this.state.clearInput}/>} />
          <Route path='/login' render={(props) => <Login {...props} clearInput={this.state.clearInput}/>}/>
-        
-         {/* <Route path='/login' component={Login}/> */}
-         <Route path='/registration' component={Register}/>
-         
+         <Route path='/registration' component={Register}/>   
        </Switch>
-       
-      // </div>
     );
   }
 }
