@@ -8,6 +8,8 @@ import style2 from '../App.module.css';
 
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {setCurrentChannel} from '../redux/actions/currentChannelAction';
+
 
 class Chat extends Component {
 
@@ -38,9 +40,16 @@ class Chat extends Component {
     }
 
     closeLinkPanel = (e) => {
-        console.log('works closeLinkPanel');
+        // console.log('works closeLinkPanel');
         this.setState({
             toggleLinkPanel: false,
+        })
+    }
+
+    componentDidMount() {
+        window.socket.on("channel-created", (obj) => {
+            console.log(obj)
+           this.props.setCurrentChannel(obj)
         })
     }
 
@@ -52,7 +61,10 @@ class Chat extends Component {
                 })
             }
         }  
-       
+        window.socket.on("channel-created", (obj) => {
+            console.log(obj)
+           this.props.setCurrentChannel(obj)
+        })
     }
 
     render() {
@@ -67,12 +79,12 @@ class Chat extends Component {
                 <div className={style.chat}>
 
                     <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
-                    <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.divCloseSidePanel}></div>
+                    <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel ?style.divCloseSidePanel : null}></div>
 
                     <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
 
                     <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel}/>
-                    <div onClick={this.closeLinkPanel} className={this.state.toggleLinkPanel && style.divCloseLinkPanel}></div>
+                    <div onClick={this.closeLinkPanel} className={this.state.toggleLinkPanel ? style.divCloseLinkPanel : null}></div>
                     
                 </div> 
         }
@@ -85,7 +97,7 @@ function MSTP (state) {
   return {
       allChannels: state.allChannels,
       allUsers: state.allUsers,
-      currentChannel:state.currentChannel,
+      currentChannel: state.currentChannel,
       currentUser : state.currentUser,
   }
 }
@@ -98,9 +110,9 @@ function MDTP (dispatch) {
     //   setAllUsers: function (data){
     //     dispatch(setAllUsers(data))
     //   },
-    //     setCurrentChannel: function (data){
-    //       dispatch(setCurrentChannel(data))
-    //   },
+        setCurrentChannel: function (data){
+          dispatch(setCurrentChannel(data))
+      },
     //     setCurrentUser: function (data){
     //       dispatch(setCurrentUser(data))
     //   },

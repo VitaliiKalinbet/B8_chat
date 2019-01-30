@@ -14,3 +14,4 @@ const currentChannel = (state = {}, action) => {
 }
 
 export default currentChannel;
+

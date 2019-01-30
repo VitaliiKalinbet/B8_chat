@@ -59,29 +59,30 @@ module.exports = io => {
                     if (err) throw err;
                     return channels = data
                 })
-                // console.log('ssssssssssssssssssssssssssssssss')
             client.emit('client-id', client.id)
         })
         client.on('send-user-name-to-online-DB', (user) => {
             usersOnline.push(user)
             console.log(usersOnline)
-            io.emit('get-user-name', usersOnline)
+            io.emit('send-users-online', usersOnline)
         })
         client.on("disconnect", () => {
-            let arr = usersOnline.filter(el => el.userId !== client.id)
+            let arr = usersOnline.filter(el => el.clientId !== client.id)
             usersOnline = arr
             console.log(online > 0 ? --online : null);
             console.log(`Now in chat ${online} users.`); 
             client.broadcast.emit("change-online", online);
-            io.emit('get-user-name', usersOnline)
+            console.log(usersOnline)
+            io.emit('send-users-online', usersOnline)
         });
         client.on('user-sign-out', (id) => {
-            let arr = usersOnline.filter(el => el.userId !== id)
+            let arr = usersOnline.filter(el => el.clientId !== id)
             usersOnline = arr
             console.log(online > 0 ? --online : null);
             console.log(`Now in chat ${online} users.`); 
             client.broadcast.emit("change-online", online);
-            io.emit('get-user-name', usersOnline)
+            console.log(usersOnline)
+            io.emit('send-users-online', usersOnline)
         })
         // client.on("typing", (data) => {
         //     console.log(data)
@@ -157,6 +158,12 @@ module.exports = io => {
                         clientId: client.id,
                     };
                     client.emit('registration-on-DB', message);
+
+                    let allUsers = User.find()
+                    allUsers.lean().exec(function(err,docs2) {
+                        if (err) throw err;
+                        io.emit('all-users', docs2)
+                    })
                 }
             } catch (e) {
                 console.error("E, registeration,", e);
@@ -211,7 +218,6 @@ module.exports = io => {
                     })
                     User.findOne({_id: obj.id}).lean().exec(function(err,user) {
                         if (err) throw err;
-                        // console.log('aaa')
                         client.emit("user-avatar-was-edited", user)
                     })
                 }  
@@ -222,6 +228,7 @@ module.exports = io => {
                 if(err) return console.error(err);
                 console.log('Channel create!')
                 client.emit("channel-created", data);
+
                 let allChannels = Channel.find()
                 allChannels.lean().exec(function(err,docs3) {
                     if (err) throw err;

@@ -7,6 +7,7 @@ import socket from "socket.io-client";
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Registration from './Auth/Registration'
 import Main from './Main/Main';
+import uuidv4 from 'uuid'
 // import { Modal, Input, Button, Icon } from 'semantic-ui-react';
 
 

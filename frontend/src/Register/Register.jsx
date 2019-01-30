@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import style from './Register.module.css';
 import { FaUserAlt, FaEnvelope, FaUnlockAlt } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-import md5 from 'md5';
+// import md5 from 'md5';
 import uuidv4 from 'uuid'
 
 class Register extends Component {

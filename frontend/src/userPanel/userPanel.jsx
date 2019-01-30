@@ -12,6 +12,7 @@ import {removeAllUsers} from '../redux/actions/allUsersAction';
 import {removeCurrentChannel} from '../redux/actions/currentChannelAction';
 import {removeCurrentUser} from '../redux/actions/currentUserAction';
 
+
 class UserPanel extends Component {
 
     state = {
@@ -66,32 +67,23 @@ class UserPanel extends Component {
             id: this.props.currentUser._id,
             img: this.state.previewImage,
           }
-        // console.log(obj)
         window.socket.emit('change-user-avatar', obj)
         this.toggleModal()
         }
     }
 
     signOut = () => {
-        // this.setState({
-        //   currentUser: '',
-        //   modal: true,
-        //   messages: [],
-        //   currentChannel: null,
-        // })
-        console.log('hhhhhhhhhhhh')
         this.props.removeAllChannels()
         this.props.removeAllUsers()
         this.props.removeCurrentUser()
         this.props.removeCurrentChannel()
-
         this.props.history.push('/login')
-        // window.socket.emit('user-sign-out', this.state.userId)
+        window.socket.emit('user-sign-out', this.props.clientId)
     }
 
     render() {
 
-        const imageSrc = 'https://cdn.vox-cdn.com/thumbor/TiwabydzgLgAVBjjJvAO_dnKo_o=/0x16:1103x751/1200x800/filters:focal(0x16:1103x751)/cdn.vox-cdn.com/uploads/chorus_image/image/46840054/Screenshot_2015-07-27_15.11.13.0.0.png';
+        // const imageSrc = 'https://cdn.vox-cdn.com/thumbor/TiwabydzgLgAVBjjJvAO_dnKo_o=/0x16:1103x751/1200x800/filters:focal(0x16:1103x751)/cdn.vox-cdn.com/uploads/chorus_image/image/46840054/Screenshot_2015-07-27_15.11.13.0.0.png';
         let { dropdown, showModal, previewImage, croppedImage } = this.state;
         const { currentUser } = this.props;
         return (
@@ -134,6 +126,7 @@ function MSTP (state) {
         // allUsers: state.allUsers,
         // currentChannel:state.currentChannel,
         currentUser : state.currentUser,
+        clientId: state.clientId,
     }
 }
 
