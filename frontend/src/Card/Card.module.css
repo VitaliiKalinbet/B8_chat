@@ -1,0 +1,75 @@
+.cardLeft{
+  height: auto;
+  display: flex;
+
+  margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+}
+
+.cardRight {
+  height: auto;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.icon{
+  width: 46px;
+  height: 37px;
+  background-color:#1f8efa;
+  margin: 0 0.8rem;
+  border-radius: 5px;
+}
+
+.message_infoLeft{
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.message_infoRight{
+  display: flex;
+  list-style: none;
+  flex-direction: row-reverse;
+}
+
+.time{
+  color:#657d95;
+  font-size: 0.6rem;
+  margin: 0 0.5rem;
+}
+
+.name{
+  color: #2e3039;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.text{
+  font-size: 1rem;
+  width: 100%;
+  height: auto;
+  margin: 0.3rem 0;
+}
+
+.text_icon {
+  display: flex;
+}
+
+.edited {
+  font-size: 0.7rem;
+  font-style: italic;
+  color:#bac4c9;
+}
+
+.text_icon_span {
+  font-size: 0.7rem;
+  margin-right: 0.4rem;
+  color: #bac4c9;
+  display: flex;
+  align-items: center;
+}
+
+.message_wrapper{
+  width: 88%;
+}

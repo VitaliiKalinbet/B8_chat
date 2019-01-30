@@ -1,0 +1,12 @@
+/* .cardLeft {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+} */
+
+.cardRight {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

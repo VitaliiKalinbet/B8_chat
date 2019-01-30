@@ -25,16 +25,45 @@
 }
 
 .directMessagesItem {
+    width: 100%;
     padding: 0.2rem;
     color: #7b8aa4;
+    display: flex;
+    align-items: center;
 }
 
 .directMessagesItem:hover {
     padding: 0.2rem;
     background-color: #2b7ccd;
     width: 100%;
+    color: white;
 }
 
 .activeItem {
     color: #fff;
+}
+
+.pName_plus_avatar {
+    width: 100%;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.avatar {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 1023px) {
+    .directMessagesWrapper h4{
+        font-size: 1rem;
+    }
+
+    .directMessagesItem {
+        font-size: 1rem;
+    }
 }
