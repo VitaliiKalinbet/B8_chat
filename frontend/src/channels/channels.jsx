@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from './channels.module.css';
 import Modal from '../sidePanelModal/modal';
-import { setCurrentChannel } from '../redux/actions/actions';
+// import { setCurrentChannel } from '../redux/actions/allChannelsAction';
 import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
 
@@ -95,7 +95,7 @@ class Channels extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setChannel: (channel) => dispatch(setCurrentChannel(channel)),
+  // setChannel: (channel) => dispatch(setCurrentChannel(channel)),
 });
 
 export default connect(null, mapDispatchToProps)(Channels);

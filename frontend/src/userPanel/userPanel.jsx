@@ -14,6 +14,18 @@ export default class UserPanel extends Component {
         blob: '',
     }
 
+    toggleDropdown = () => {
+        this.setState(prev => ({
+            dropdown: !prev.dropdown
+        }));
+    }
+
+    toggleModal = () => {
+        this.setState(prev => ({
+            showModal: !prev.showModal
+        }));
+    }
+
     handleChange = event => {
         const file = event.target.files[0];
         const reader = new FileReader();

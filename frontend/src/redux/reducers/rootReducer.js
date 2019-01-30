@@ -1,9 +1,14 @@
-import { combineReducers} from 'redux';
-import channelReducer from './channelReducer';
+import {combineReducers} from 'redux'; // объединяет все поля в один объект
+import allUsers from './allUsersReducers';
+import currentUser from './currentUserReducer';
+import allChannels from './allChannelsReducer';
+import currentChannel from './currentChannelReducer';
 
 const rootReducer = combineReducers({
-    channel: channelReducer,
-
-});
+    allUsers: allUsers,
+    allChannels: allChannels,
+    currentUser: currentUser,
+    currentChannel: currentChannel,
+})
 
 export default rootReducer;

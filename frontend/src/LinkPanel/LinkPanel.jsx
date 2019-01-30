@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import style from './LinkPanel.module.css';
 import Modal from '../ModalLinkPanel/ModalLinkPanel';
-import linkPanel_search from '../img/link_panelSearch.png'
-import linkPanel_figure from '../img/linkPanel_figure.png'
-import linkPanel_calendar from '../img/linkPanel_calendar.png'
-import linkPanel_icons from '../img/linkPanel_icon.png'
-import linkPanel_change from '../img/linkPanel_change.png'
+// import linkPanel_search from '../img/link_panelSearch.png'
+// import linkPanel_figure from '../img/linkPanel_figure.png'
+// import linkPanel_calendar from '../img/linkPanel_calendar.png'
+// import linkPanel_icons from '../img/linkPanel_icon.png'
+// import linkPanel_change from '../img/linkPanel_change.png'
 import linkPanel_add from '../img/linkPanel_add.png'
 import { FaGooglePlus, FaLinkedinIn, FaFacebookSquare, FaTrello, FaGoogleDrive, FaCalendarAlt, FaEnvelope, FaMusic, FaFileImage } from 'react-icons/fa';
 import { MdStar } from "react-icons/md";
-import { IconContext } from "react-icons";
+// import { IconContext } from "react-icons";
 
 class LinkPanel extends Component {
 
@@ -90,7 +90,7 @@ class LinkPanel extends Component {
   }
 
   render() {
-    const { showModal, modalInputName, modalInputLink, imgActive, links } = this.state
+    const { showModal, modalInputName, modalInputLink, imgActive } = this.state
     return (
       <div className={this.props.toggleLinkPanel ? style.linkPanel_container : style.linkPanel_container_none}>
         <div className={style.link_height}>

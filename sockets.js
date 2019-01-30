@@ -59,6 +59,7 @@ module.exports = io => {
                     if (err) throw err;
                     return channels = data
                 })
+                // console.log('ssssssssssssssssssssssssssssssss')
             client.emit('client-id', client.id)
         })
         client.on('send-user-name-to-online-DB', (user) => {

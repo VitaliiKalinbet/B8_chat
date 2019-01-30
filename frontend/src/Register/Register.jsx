@@ -53,7 +53,9 @@ class Register extends Component {
 
               </form>
 
-              <p className={style.subtitle}>If you have an account ?        <NavLink className={style.subtitle_navlink} to='/login' >Log   in</NavLink>
+              <p className={style.subtitle}>If you have an account ?  
+                    
+              <NavLink to='/login' className={style.subtitle_navlink}>Log   in</NavLink>
               </p>
         </div>
 

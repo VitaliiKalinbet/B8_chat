@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from './directMessages.module.css';
 import { connect } from 'react-redux';
-import { setCurrentDirectUser } from '../redux/actions/actions.js';
+// import { setCurrentDirectUser } from '../redux/actions/allChannelsAction.js';
 import { FaCircle } from 'react-icons/fa';
 import avatar from '../img/avatar.jpg';
 
@@ -65,4 +65,4 @@ class DirectMessages extends Component {
   }
 }
 
-export default connect(null, {setCurrentDirectUser})(DirectMessages);
+export default connect(null, null)(DirectMessages);

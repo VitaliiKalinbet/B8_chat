@@ -3,12 +3,18 @@ import Messages from '../Messages/Messages';
 import SidePanel from '../sidePanel/sidePanel';
 import style from './Chat.module.css';
 import LinkPanel from '../LinkPanel/LinkPanel.jsx'
+import Loader from 'react-loader-spinner';
+import style2 from '../App.module.css';
+
+import {connect} from 'react-redux'
 
 class Chat extends Component {
 
     state = {
         toggleSidePanel: false,
         toggleLinkPanel: false,
+        isLoading: true,
+        error: '',
     }
 
     showSidePanel = (e) => {
@@ -37,29 +43,68 @@ class Chat extends Component {
         })
     }
 
+   componentDidUpdate(prevProps){   
+        if (prevProps !== this.props) {
+            if (this.props.allChannels.length && this.props.allUsers.length && this.props.currentUser.username && this.props.currentChannel.channelName) {
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }  
+       
+    }
+
+   
     render() {
+        const { isLoading } = this.state
+
         return (
-            <div className={style.chat}>
+            <div> {isLoading ?  
+                    <div className={style2.loader}>
+                        <Loader type="Watch" color="#1f8efa" height='100' width='100' />
+                    </div> 
+                    :   
+                <div className={style.chat}>
 
-                {/* <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.wraperSidePanel}>
                     <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
-                </div>
-                <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
-                <div className={style.wraperLinkPanel}>
+                    <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.divCloseSidePanel}></div>
+
+                    <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
+
                     <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel}/>
-                </div> */}
-
-                <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
-                <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel && style.divCloseSidePanel}></div>
-
-                <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
-
-                <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel}/>
-                <div onClick={this.closeLinkPanel} className={this.state.toggleLinkPanel && style.divCloseLinkPanel}></div>
-                 
+                    <div onClick={this.closeLinkPanel} className={this.state.toggleLinkPanel && style.divCloseLinkPanel}></div>
+                    
+                </div> 
+        }
             </div>
         );
     }
 }
 
-export default Chat;
+function MSTP (state) {
+  return {
+      allChannels: state.allChannels,
+      allUsers: state.allUsers,
+      currentChannel:state.currentChannel,
+      currentUser : state.currentUser,
+  }
+}
+
+function MDTP (dispatch) {
+  return {
+    //   setAllChannels: function (data){
+    //       dispatch(setAllChannels(data))
+    //   },
+    //   setAllUsers: function (data){
+    //     dispatch(setAllUsers(data))
+    //   },
+    //     setCurrentChannel: function (data){
+    //       dispatch(setCurrentChannel(data))
+    //   },
+    //     setCurrentUser: function (data){
+    //       dispatch(setCurrentUser(data))
+    //   },
+  }
+}
+
+export default connect(MSTP, MDTP) (Chat)
