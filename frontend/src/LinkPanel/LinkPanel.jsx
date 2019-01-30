@@ -91,7 +91,7 @@ class LinkPanel extends Component {
   render() {
     const { showModal, modalInputName, modalInputLink, imgActive } = this.state
     return (
-      <div className={true ? style.linkPanel_container : style.linkPanel_container_none}>
+      <div className={this.props.toggleLinkPanel ? style.linkPanel_container : style.linkPanel_container_none}>
         <div className={style.link_height}>
           <div className={style.icons}>
             <img className={style.panel_icons} src={linkPanel_search} alt="search" />

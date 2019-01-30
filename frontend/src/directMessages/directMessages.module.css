@@ -42,10 +42,10 @@
 
 @media (max-width: 1023px) {
     .directMessagesWrapper h4{
-        font-size: .7rem;
+        font-size: 1rem;
     }
 
     .directMessagesItem {
-        font-size: .7rem;
+        font-size: 1rem;
     }
 }

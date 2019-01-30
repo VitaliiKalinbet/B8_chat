@@ -1,6 +1,12 @@
 .linkPanel_container{
   min-height: 100vh;
   background: #273247;
+  width: 100%;
+}
+
+.linkPanel_container_none {
+  min-height: 100vh;
+  background: #273247;
   width: 6%;
 }
 
@@ -95,9 +101,9 @@
 
 @media (max-width: 767px) {
   .linkPanel_container{
-    min-height: 100vh;
+    height: 100%;
     position: absolute;
-    width: 40%;
+    width: 30%;
     top: 0;
     right: 0;
   }

@@ -76,10 +76,10 @@
 
 @media (max-width: 1023px) {
     .channelsWrapper h3 {
-        font-size: .7rem;
+        font-size: 1rem;
     }
 
     .channelItem {
-        font-size: .7rem;
+        font-size: 1rem;
     }
 }
