@@ -13,15 +13,14 @@
 }
 
 .directMessagesList {
-    width: 100%;
+    width: 90%;
+    height: 15rem;
     padding: 0 10% 0;
     box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
     list-style: none;
-    flex-direction: column;
     cursor: pointer;
     color: #fff;
+    overflow-y: scroll;
 }
 
 .directMessagesItem {
@@ -65,5 +64,14 @@
 
     .directMessagesItem {
         font-size: 1rem;
+    }
+    .directMessagesList {
+        height: 14rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .directMessagesList {
+        height: 9rem;
     }
 }

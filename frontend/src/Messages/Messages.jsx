@@ -33,7 +33,55 @@ class Messages extends Component {
         "addAt": {
           "$date": "2019-01-28T22:16:36.247Z"
         }
-      }
+      },
+      {
+        "addAt": {
+          "$date": "2019-01-28T19:49:06.126Z"
+        },
+        "_id": {
+          "$oid": "5c4f5cb260bd064b4ca20496"
+        },
+        "time": 1548704945483,
+        "content": "It's general",
+        "author": "aaa@aa.com",
+        "messageId": "2f82029e-84bb-4cc5-a69b-e5930bb25cd9"
+      },
+      {
+        "_id": {
+          "$oid": "5c4f7f44c4454b3654b3b472"
+        },
+        "time": 1548713795690,
+        "content": "hello)) it's default start chat.",
+        "author": "kk@kk.com",
+        "messageId": "efdca3e8-f155-418e-ac93-479e22afa86a",
+        "addAt": {
+          "$date": "2019-01-28T22:16:36.247Z"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "5c4f7f44c4454b3654b3b472"
+        },
+        "time": 1548713795690,
+        "content": "hello)) it's default start chat.",
+        "author": "kk@kk.com",
+        "messageId": "efdca3e8-f155-418e-ac93-479e22afa86a",
+        "addAt": {
+          "$date": "2019-01-28T22:16:36.247Z"
+        }
+      },
+      {
+        "_id": {
+          "$oid": "5c4f7f44c4454b3654b3b472"
+        },
+        "time": 1548713795690,
+        "content": "hello)) it's default start chat.",
+        "author": "kk@kk.com",
+        "messageId": "efdca3e8-f155-418e-ac93-479e22afa86a",
+        "addAt": {
+          "$date": "2019-01-28T22:16:36.247Z"
+        }
+      },
     ],
     messages2: [
       {
@@ -63,6 +111,14 @@ class Messages extends Component {
     ]
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount () {
+    this.scrollToBottom();
+  }
+
   handlerChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -76,7 +132,7 @@ class Messages extends Component {
           <FaBars onClick={this.props.showSidePanel} className={style.additionalButton}/>
           <div className={style.header}>
             <div className={style.headerName}>
-              <h2 className={style.name}>B8 chat</h2>
+              <h2 className={style.name}>Channels 1</h2>
               <p className={style.members}>4331 members</p>
             </div>
             <form className={style.headerForm} onSubmit={this.formSubmit}>
@@ -89,6 +145,8 @@ class Messages extends Component {
         <div className={style.messages}>
           <div className={style.messagesArea}>
             <Message messages={this.state.messages} messages2={this.state.messages2} />
+                <div ref={(el) => { this.messagesEnd = el; }}>
+                </div>
           </div>
           <form className={style.messageForm} onSubmit={this.formSubmit}>
             <MdAttachFile className={style.addFile} />

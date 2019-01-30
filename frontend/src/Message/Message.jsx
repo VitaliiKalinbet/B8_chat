@@ -25,11 +25,10 @@ class Message extends Component {
                     // </div>
                     )}
                 {this.props.messages2.map(el =>
-                    <div className={styles.cardRight} >
-                    <Card2 key={el.messageId}  author={el.author} time={el.time} content={el.content}/>
+                    <div key={el.messageId} className={styles.cardRight} >
+                        <Card2 author={el.author} time={el.time} content={el.content}/>
                     </div>
                 )}
-
             </div>
         );
     }

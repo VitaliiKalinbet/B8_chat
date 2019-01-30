@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     box-sizing: border-box;
 }
 .sidePanelNone {
@@ -20,6 +20,20 @@
     margin: 0;
 }
 
+.title {
+    text-align: center;
+    margin-top: 1rem;
+    color: #1f8efa;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media (max-width: 1023px) {
+    .title {
+        font-size: 1.5rem;
+    }
+}
+
 @media (max-width: 767px) {
     .sidePanel {
         width: 70%;
@@ -30,5 +44,8 @@
     }
     .sidePanelNone {
         display: none;
+    }
+    .title {
+        font-size: 1.5rem;
     }
 }

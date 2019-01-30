@@ -18,11 +18,10 @@ class LinkPanel extends Component {
     iconName: '',
     links: [
       {
-        linkName: 'Google search',//информация которую вводит юзер
-        url: 'https://www.google.com/webhp',//информация которую вводит юзер
-        // iconName: './images/googleIcon.png',//иконка которую добавляет юзер
+        linkName: 'Google search',
+        url: 'https://www.google.com/',
         iconName: 'FaGoogle',
-        linkId: 1,
+        linkId: uuidv4(),
       }
     ],
     iconPack: [
@@ -108,7 +107,7 @@ class LinkPanel extends Component {
       linkName: this.state.modalInputName,
       url: this.state.modalInputLink,
       iconName: this.state.iconName,
-      linkId: uuidv4()
+      linkId: uuidv4(),
     }
     this.setState(prev =>({
       links: [...prev.links, linksAdd]

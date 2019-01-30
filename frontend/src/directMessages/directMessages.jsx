@@ -28,6 +28,101 @@ class DirectMessages extends Component {
       name: 'Sara',
       id: 'id-444'
     },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Bill',
+      id: 'id-111'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Arnold',
+      id: 'id-222'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Clara',
+      id: 'id-333'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Bill',
+      id: 'id-111'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Arnold',
+      id: 'id-222'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Clara',
+      id: 'id-333'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Bill',
+      id: 'id-111'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Arnold',
+      id: 'id-222'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Clara',
+      id: 'id-333'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Bill',
+      id: 'id-111'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Arnold',
+      id: 'id-222'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Clara',
+      id: 'id-333'
+    },
+    {
+      avatar: '../img/avatar.jpg',
+      name: 'Sara',
+      id: 'id-444'
+    },
   ]
 
   state = {

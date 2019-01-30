@@ -62,6 +62,7 @@
       height: 65vh;
       width: 92%;
       margin: auto;
+      overflow-y: scroll;
     }
     .messageForm {
       display: flex;

@@ -47,7 +47,8 @@
     }
 
     .channelList{
-        width: 100%;
+        width: 90%;
+        height: 10rem;
         padding: 0 10% 0;
         box-sizing: border-box;
         display: flex;
@@ -56,9 +57,11 @@
         flex-direction: column;
         cursor: pointer;
         color: #fff;
+        overflow-y: scroll;
     }
 
     .channelItem {
+        width: 100%;
         padding: 0.2rem;
         color: #7b8aa4;
     }
@@ -81,5 +84,15 @@
 
     .channelItem {
         font-size: 1rem;
+    }
+
+    .channelList{
+        height: 8rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .channelList{
+        height: 5rem;
     }
 }

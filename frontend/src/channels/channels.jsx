@@ -35,6 +35,60 @@ class Channels extends Component {
         name: 'Valentine3'
       }
     },
+    {
+      id: 'id-4',
+      name: 'Channel-4',
+      description: 'my channel 4',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine4'
+      }
+    },
+    {
+      id: 'id-5',
+      name: 'Channel-5',
+      description: 'my channel 5',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine5'
+      }
+    },
+    {
+      id: 'id-6',
+      name: 'Channel-6',
+      description: 'my channel 6',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine6'
+      }
+    },
+    {
+      id: 'id-7',
+      name: 'Channel-7',
+      description: 'my channel 7',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine7'
+      }
+    },
+    {
+      id: 'id-8',
+      name: 'Channel-8',
+      description: 'my channel 8',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine8'
+      }
+    },
+    {
+      id: 'id-9',
+      name: 'Channel-9',
+      description: 'my channel 9',
+      createdBy: {
+        avatar: 'https://brandmark.io/logo-rank/random/beats.png',
+        name: 'Valentine9'
+      }
+    },
   ]
 
   state = {
@@ -77,7 +131,7 @@ class Channels extends Component {
     return (
       <div className={style.channelsWrapper}>
         <div className={style.channelTitle}>
-          <h3>Add New Channel</h3>
+          <h3>Channels</h3>
           <FaPlus onClick={this.toggleModal} className={style.channelIcon}/>
         </div>
         <div className={style.line}></div>
