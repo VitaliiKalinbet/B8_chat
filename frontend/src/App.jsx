@@ -15,8 +15,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className={style.test}>
-        {/* this.props.isLoading ? Spinner подключить пока все не загрузится : */}
+      <div>
        <Switch>
           {this.state.isLoading ?
             <div className={style.loader}>

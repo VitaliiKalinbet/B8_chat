@@ -22,19 +22,23 @@
 
 .global{
   transition: 1s;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .global:hover{
   color: #273247;
 }
 
-.svgFalse{
+/* .svgFalse{
   border-bottom: 2px solid black;
-}
+} */
 
 .svgLink{
+  box-sizing: border-box;
   border-bottom: 2px solid red;
   /* border: 2px solid red; */
+  
 }
 
 .modalInput {
