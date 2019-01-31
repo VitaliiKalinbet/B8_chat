@@ -7,7 +7,7 @@ const currentUser = (state = {}, action) => {
         case actionTypes.REMOVE_CURRENT_USER:
             return {}
         case actionTypes.UPDATE_CURRENT_USER:
-            return {...action.data}
+            return {...state,links:action.data}
         default:
             return state;
     }

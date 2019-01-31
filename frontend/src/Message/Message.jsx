@@ -6,7 +6,6 @@ import md5 from 'md5';
 
 class Message extends Component {
 
-
     // avatarSrcFunction = (email) => {
     //     let a = this.props.allUsers.find(item => item.email === email)
     //     console.log(a)
@@ -29,12 +28,12 @@ class Message extends Component {
         console.log(user)
         if (user.avatar) {
             console.log(user.avatar );
-            return <img src={user.avatar} alt='user avatar' width='46px' height='auto' />
+            return <img className={styles.message_avatar} src={user.avatar} alt='user avatar'/>
         }
         else {
            
             let userSrc = `http://gravatar.com/avatar/${md5(`${user.username}`)}?d=identicon`
-            return <img src={userSrc} alt='user avatar' width='46px' height='auto' />
+            return <img className={styles.message_avatar} src={userSrc} alt='user avatar'/>
         }
 
     }

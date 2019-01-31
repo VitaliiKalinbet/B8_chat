@@ -6,6 +6,9 @@ import Message from '../Message/Message';
 import uuidv4 from 'uuid';
 import {setAllChannels} from '../redux/actions/allChannelsAction';
 import {connect} from 'react-redux';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
+
 // import {setAllUsers, removeAllUsers,updateAllUsers} from '../redux/actions/allUsersAction';
 // import {setCurrentChannel} from '../redux/actions/currentChannelAction';
 // import {setCurrentUser} from '../redux/actions/currentUserAction';
@@ -24,6 +27,7 @@ class Messages extends Component {
     search: '',
     newMessage:true,
     editMessage:'',
+    showEmoji: false,
   }
 
   scrollToBottom = () => {
@@ -140,6 +144,33 @@ class Messages extends Component {
     }
   }
 
+  showEmoji = (e) => {
+		e.preventDefault();
+		this.setState(prev => ({
+			showEmoji: !prev.showEmoji,
+		}))
+  }
+  
+  addEmoji = (e) => {
+		//console.log(e.unified)
+		if (e.unified.length <= 5) {
+			let emojiPic = String.fromCodePoint(`0x${e.unified}`)
+			this.setState(prev => ({
+				message: prev.message + emojiPic
+			}))
+		} else {
+			let sym = e.unified.split('-')
+			let codesArray = []
+			sym.forEach(el => codesArray.push('0x' + el))
+			//console.log(codesArray.length)
+			//console.log(codesArray)  // ["0x1f3f3", "0xfe0f"]
+			let emojiPic = String.fromCodePoint(...codesArray)
+			this.setState(prev => ({
+				message: prev.message + emojiPic
+			}))
+		}
+	}
+
 //   handleKeyDown = (e) => {
     
 //     if (e.keyCode === 13) {
@@ -147,9 +178,6 @@ class Messages extends Component {
 //       //  this.sendMessageToChannel();
 //     }
 // }
-
-
-
 
   render() {
 
@@ -181,9 +209,13 @@ class Messages extends Component {
                 </div>
           </div>
           <form className={style.messageForm} onSubmit={this.sendMessageToChannel}>
-            <MdAttachFile className={style.addFile} />
-            <input type="text" placeholder='Enter the message' name='message' value={this.state.message} onChange={this.handlerChange} className={style.messageInput}  onKeyDown = {this.handleKeyDown}/>
-            <FaRegSmile className={style.smile} />
+            {/* <MdAttachFile className={style.addFile} /> */}
+            <input required type="text" placeholder='Enter the message' name='message' value={this.state.message} onChange={this.handlerChange} className={style.messageInput}  onKeyDown = {this.handleKeyDown}/>
+            <FaRegSmile onClick={this.showEmoji} className={style.smile} />
+            {this.state.showEmoji && 
+              <span className={style.emoji}> 
+                <Picker set='emojione' style={{ width: '20rem', showPreview: 'false', position: 'absolute', bottom: '20px', right: '20px' }} i18n={{ categories: { search: 'Résultats de recherche', recent: 'Récents' } }} onSelect={this.addEmoji} />
+              </span>}
             <MdSend className={style.send} onClick={this.sendMessageToChannel} />
           </form>
         </div>
