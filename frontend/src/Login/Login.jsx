@@ -8,7 +8,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    errors: [{message: 'Server error!!!'}],
+    // errors: [{message: 'Server error!!!'}],
   }
 
   handelChange = (e) => {
@@ -55,14 +55,12 @@ class Login extends Component {
               </form>
 
               <p className={style.subtitle}>Don't have an account ?        
-                <NavLink className={style.subtitle_navlink} to='/registration'>Registration</NavLink>
+                <NavLink className={style.subtitle_navlink} to='/registration' onClick={this.props.clearError}>Registration</NavLink>
               </p>
 
-              {this.state.errors.length > 0 && (
                 <p className={style.error}>
-                  {this.state.errors.map(el => <p key={el.message}>{el.message}</p>)}
+                  {this.props.error && this.props.error}
                 </p>
-              )}
 
         </div>
       </div>

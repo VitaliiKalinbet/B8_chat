@@ -14,6 +14,10 @@ class Channels extends Component {
     // modalInputDescription: '',
   }
 
+  componentDidMount(){
+    this.props.setActiveItemId('General')
+  }
+
   toggleModal = () => {
     this.setState(prev => ({
       showModal: !prev.showModal,
@@ -40,6 +44,7 @@ class Channels extends Component {
         author: this.props.currentUser.email, 
         type: 'public',
     }
+    this.props.setActiveItemId(this.state.modalInputName)
     this.setState({
         showModal: false,
         modalInputName: '',
@@ -64,8 +69,8 @@ class Channels extends Component {
           {/* <input className={style.modalInput} value={modalInputDescription} onChange={this.handleChange} type="text" name='modalInputDescription' placeholder='Enter a channel description' /> */}
         </Modal>}
         <ul className={style.channelList}>
-          {allChannels.map(el => el.type === 'public' ? <li onClick={() => {this.changeCurrentChannel(el); this.props.setActiveItemId(el._id); }}
-            className={this.props.getActiveItemId() !== el._id ? style.channelItem : `${style.channelItem} ${style.activeItem}`} key={el._id}>{`# ${el.channelName}`}</li> : null)}
+          {allChannels.map(el => el.type === 'public' ? <li onClick={() => {this.changeCurrentChannel(el); this.props.setActiveItemId(el.channelName); }}
+            className={this.props.getActiveItemId() !== el.channelName ? style.channelItem : `${style.channelItem} ${style.activeItem}`} key={el._id}>{`# ${el.channelName}`}</li> : null)}
         </ul>
       </div>
     )

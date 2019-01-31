@@ -6,7 +6,7 @@ import DirectMessages from '../directMessages/directMessages';
 
 export default class SidePanel extends Component {
   state = {
-    activeItemId: null,
+    activeItemId: 'General',
   }
 
   setActiveItemId = (activeItemId) => {

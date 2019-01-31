@@ -101,12 +101,18 @@ class App extends Component {
     window.socket.emit('send-user-name-to-online-DB', obj)
   }
 
+  clearError = () => {
+    this.setState({
+      error: '',
+    })
+  }
+
   render() {
     return (
        <Switch>
          <Route exact path='/' render={(props) => <Chat {...props} clearInput={this.state.clearInput}/>} />
-         <Route path='/login' render={(props) => <Login {...props} clearInput={this.state.clearInput}/>}/>
-         <Route path='/registration' component={Register}/>   
+         <Route path='/login' render={(props) => <Login {...props} error={this.state.error} clearError={this.clearError}/>}/>
+         <Route path='/registration' render={(props) => <Register {...props} error={this.state.error} clearError={this.clearError}/>}/>
        </Switch>
     );
   }

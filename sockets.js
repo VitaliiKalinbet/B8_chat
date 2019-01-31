@@ -193,12 +193,12 @@ module.exports = io => {
                     };
                     client.emit('login-on-DB', message);
                     
-                } else if (userDb == void(0)) {
-                    message = {message: "User not exist"};
+                } else if (userDb == void(0) || userDb != void(0) && !bcrypt.compareSync(user.password, userDb.password)) {
+                    message = {message: "User not exist or password false"};
                     client.emit('login-on-DB', message);
-                } else if (userDb != void(0) && !bcrypt.compareSync(user.password, userDb.password)) {
-                    message = {message: "Password false, try again"};
-                    client.emit('login-on-DB', message);
+                // } else if (userDb != void(0) && !bcrypt.compareSync(user.password, userDb.password)) {
+                //     message = {message: "Password false, try again"};
+                //     client.emit('login-on-DB', message);
                 }
             } catch (e) {
                 console.error("E, login,", e);

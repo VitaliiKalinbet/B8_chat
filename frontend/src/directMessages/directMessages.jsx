@@ -57,7 +57,7 @@ class DirectMessages extends Component {
         <h4>Direct Messages</h4>
         <div className={style.line}></div>
         <ul className={style.directMessagesList}>
-          {this.props.allUsers.map(el => <li onClick={this.directMessages}
+          {this.props.allUsers.sort((a, b) => a.username !== b.username ? a.username < b.username ? -1 : 1 : 0).map(el => <li onClick={this.directMessages}
           className={style.directMessagesItem} key={el._id} id={el.email}>
           {/* <i class="fa fa-circle" style={{color:'green'}}></i> */}
 

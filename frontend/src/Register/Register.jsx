@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import style from './Register.module.css';
 import { FaUserAlt, FaEnvelope, FaUnlockAlt } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-// import md5 from 'md5';
 import uuidv4 from 'uuid'
 
 class Register extends Component {
@@ -12,7 +11,7 @@ class Register extends Component {
     email: '',
     password: '',
     passwordConfirm: '',
-    errors: [],
+    error: '',
   }
 
   handelChange = (e) => {
@@ -23,28 +22,6 @@ class Register extends Component {
     })
   }
 
-  // isPasswordValid = ({password, passwordConfirm}) => {
-  //   return password === passwordConfirm;
-  // }
-
-  // isFormValid = (e) => {
-  //   e.preventDefault();
-  //   let errors = [];
-  //   let error;
-  //   if(!this.isPasswordValid(this.state)){
-  //     error = {
-  //       message: 'Password is invalid'
-  //     };
-  //     this.setState({
-  //       errors: errors.concat(error)
-  //     })
-  //     return false;
-  //   } else {
-  //     this.setState({
-  //       errors: []
-  //     })
-  //     return true
-
   registrationToChat = (e) => {
     e.preventDefault()
     // console.log('bbb')
@@ -54,15 +31,17 @@ class Register extends Component {
         username: this.state.name,
         password: this.state.password,
         email: this.state.email,
-        // avatar: `http://gravatar.com/avatar/${md5(this.state.user)}?d=identicon`,
         links: [{
             linkName: 'Google search',
-            url: 'https://www.google.com/webhp',
+            url: 'https://www.google.com',
             iconName: 'FaGoogle',
             linkId: uuidv4()
         }]
         }
         console.log(user)
+        this.setState({
+          error: ''
+        })
       window.socket.emit('registration', user)
     } else {
       this.setState({
@@ -73,7 +52,7 @@ class Register extends Component {
 
   render() {
 
-    {this.props.clearInput && this.setState({ name: '', email: '', password: '', passwordConfirm: ''})}
+    {this.props.clearInput && this.setState({ name: '', email: '', password: '', passwordConfirm: '', error: ''})}
 
     return (
       <div className={style.registration_page}>
@@ -95,12 +74,12 @@ class Register extends Component {
 
                 <div className={style.div_input}>
                   <FaUnlockAlt className={style.icon_input}/>
-                  <input className={style.input} type="text" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' />
+                  <input className={style.input} type="password" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' />
                 </div>
                   
                 <div className={style.div_input}>
                   <FaUnlockAlt className={style.icon_input}/>
-                  <input className={style.input} type="text" name="passwordConfirm" value={this.props.telephone} onChange={this.handelChange} placeholder='Confirm password' />
+                  <input className={style.input} type="password" name="passwordConfirm" value={this.props.telephone} onChange={this.handelChange} placeholder='Confirm password' />
                 </div>
                   
                 <input onClick={this.isFormValid} className={style.submit_btn} type="submit" value="Registration" />
@@ -109,14 +88,14 @@ class Register extends Component {
 
               <p className={style.subtitle}>If you have an account ?  
                     
-              <NavLink to='/login' className={style.subtitle_navlink}>Log   in</NavLink>
+              <NavLink to='/login' className={style.subtitle_navlink} onClick={this.props.clearError}>Log   in</NavLink>
               </p>
 
-              {this.state.errors.length > 0 && (
                 <p className={style.error}>
-                  {this.state.errors.map(el => <p key={el.message}>{el.message}</p>)}
+                    {this.props.error && this.props.error}
+                    {this.state.error && this.state.error}
                 </p>
-              )}
+
         </div>
 
       </div>
