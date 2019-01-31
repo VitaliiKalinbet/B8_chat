@@ -69,7 +69,7 @@ class Channels extends Component {
           {/* <input className={style.modalInput} value={modalInputDescription} onChange={this.handleChange} type="text" name='modalInputDescription' placeholder='Enter a channel description' /> */}
         </Modal>}
         <ul className={style.channelList}>
-          {allChannels.map(el => el.type === 'public' ? <li onClick={() => {this.changeCurrentChannel(el); this.props.setActiveItemId(el.channelName); }}
+          {allChannels.sort((a, b) => a.channelName !== b.channelName ? a.channelName < b.channelName ? -1 : 1 : 0).sort((a, b) => a.channelName !== b.channelName ? a.channelName === 'General' ? -1 : 1 : 0).map(el => el.type === 'public' ? <li onClick={() => {this.changeCurrentChannel(el); this.props.setActiveItemId(el.channelName); }}
             className={this.props.getActiveItemId() !== el.channelName ? style.channelItem : `${style.channelItem} ${style.activeItem}`} key={el._id}>{`# ${el.channelName}`}</li> : null)}
         </ul>
       </div>

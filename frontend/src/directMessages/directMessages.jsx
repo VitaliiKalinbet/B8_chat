@@ -24,9 +24,9 @@ class DirectMessages extends Component {
     let user = this.state.usersOnline.find(el => el.userEmail === email) 
 
     if(user !== undefined){
-      return <FaCircle color='green'/>
+      return <FaCircle color='green' id={email}/>
     } else  {
-      return <FaCircle color='white'/>
+      return <FaCircle color='white' id={email}/>
     }
   }
 
@@ -57,13 +57,13 @@ class DirectMessages extends Component {
         <h4>Direct Messages</h4>
         <div className={style.line}></div>
         <ul className={style.directMessagesList}>
-          {this.props.allUsers.sort((a, b) => a.username !== b.username ? a.username < b.username ? -1 : 1 : 0).map(el => <li onClick={this.directMessages}
+          {this.props.allUsers.sort((a, b) => a.username !== b.username ? a.username < b.username ? -1 : 1 : 0).map(el => <li
           className={style.directMessagesItem} key={el._id} id={el.email}>
           {/* <i class="fa fa-circle" style={{color:'green'}}></i> */}
 
           {this.state.usersOnline && this.checkOnline(el.email)}
 
-          <p className={style.pName_plus_avatar} id={el.email}>
+          <p className={style.pName_plus_avatar} id={el.email} onClick={this.directMessages}>
             {el.username}
             <img className={style.avatar} id={el.email} src={el.avatar ? el.avatar : `http://gravatar.com/avatar/${md5(el.username)}?d=identicon`} alt="avatar"/>
           </p>
