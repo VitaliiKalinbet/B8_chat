@@ -140,7 +140,7 @@ class LinkPanel extends Component {
       userEmail: this.props.currentUser.email,
       link: newLinks,
     }
-    console.log(sendToDB);
+    // console.log(sendToDB);
     this.props.updateCurrentUser(newLinks);
     window.socket.emit("user-change-link", (sendToDB)); 
   }

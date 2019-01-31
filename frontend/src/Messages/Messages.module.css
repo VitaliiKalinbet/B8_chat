@@ -118,6 +118,9 @@
   .emoji {
     display: none;
   }
+  .messageForm {
+    position: static;
+  }
 }
 
 @media (max-width: 767px) {
@@ -139,7 +142,7 @@
       font-size: .7rem;
     }
     .messageInput::placeholder {
-      font-size: 0.5rem;
+      font-size: .8rem;
     }
     .search {
       width: 80%;
@@ -155,5 +158,8 @@
   }
   .emoji {
     display: none;
+  }
+  .messageForm {
+    position: static;
   }
 }

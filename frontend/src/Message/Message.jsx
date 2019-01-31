@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Message.module.css'
 import Card from '../Card/Card';
-import Card2 from '../Card/Card2';
+// import Card2 from '../Card/Card2';
 import md5 from 'md5';
 
 class Message extends Component {
@@ -25,16 +25,24 @@ class Message extends Component {
 
     avatarSrcFunction=(email)=>{
         let user = this.props.allUsers.find(item=>item.email===email)
-        console.log(user)
-        if (user.avatar) {
-            console.log(user.avatar );
-            return <img className={styles.message_avatar} src={user.avatar} alt='user avatar'/>
+        // console.log(user)
+        if (user !== undefined) {
+            if (user.avatar) {
+                // console.log(user.avatar );
+                return <img className={styles.message_avatar} src={user.avatar} alt='user avatar'/>
+            }
+            else {
+               
+                let userSrc = `http://gravatar.com/avatar/${md5(`${user.username}`)}?d=identicon`
+                return <img className={styles.message_avatar} src={userSrc} alt='user avatar'/>
+            }
         }
-        else {
-           
-            let userSrc = `http://gravatar.com/avatar/${md5(`${user.username}`)}?d=identicon`
-            return <img className={styles.message_avatar} src={userSrc} alt='user avatar'/>
-        }
+
+            else {
+                return <img className={styles.message_avatar} src={email} alt='user avatar'/>
+            }
+        
+        
 
     }
    

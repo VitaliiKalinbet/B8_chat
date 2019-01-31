@@ -14,11 +14,7 @@ import { Picker } from 'emoji-mart';
 // import {setCurrentUser} from '../redux/actions/currentUserAction';
 
 
-//Баги frontenda
-// 1) нет скрола для поля сообщений
-// 2) при нажатии на иконку не считывается id
-// 3) классы работают плохо лево право
-// 4) время отображается не корректно
+
 
 class Messages extends Component {
 
@@ -43,14 +39,14 @@ class Messages extends Component {
   }
 
   deleteMessage = (e) => {
-    //не срабатывает при нажатии на иконку, не считывает id
+  
     let id = e.target.id
-    console.log(id);
+    // console.log(id);
     let obj={
         messageId:id ,
         currentChannel: this.props.currentChannel._id,
     }
-    console.log(obj)
+    // console.log(obj)
      window.socket.emit('deleteChannelMessage', obj)
   }
 
@@ -79,28 +75,28 @@ class Messages extends Component {
             message: message,
             currentChannel: this.props.currentChannel._id
         }
-        console.log(obj)
+        // console.log(obj)
         this.setState({
             message: '',
+            showEmoji: false,
             // showEmoji: false,
         })
         window.socket.emit("channel-message", obj); 
     } else {
         let editMess = {...this.state.editMessage, content: this.state.message, edited: true}
-        console.log(editMess)
+        // console.log(editMess)
         this.setState(prev =>({
             newMessage: true,
             editMessage: {},
             message: '',
             showEmoji: false,
-            // currentChannel: prev.currentChannel.messages.map(el => el.messageId === editMess.messageId ? editMess : el)
         }))
 
         let obj={
             message: editMess,
             currentChannel: this.props.currentChannel._id,
         }
-        console.log(obj)
+        // console.log(obj)
         window.socket.emit("editChannelMessage", obj);    
     }
   }
@@ -169,7 +165,11 @@ class Messages extends Component {
 				message: prev.message + emojiPic
 			}))
 		}
-	}
+  }
+  
+  formSubmit=(e)=>{
+    e.preventDefault();
+  }
 
 //   handleKeyDown = (e) => {
     
@@ -183,7 +183,7 @@ class Messages extends Component {
 
     // console.log(this.props.currentUser)
     let showMessages = this.props.currentChannel.messages.filter(el=>el.content.toLowerCase().includes(this.state.search)?el:null)
- console.log(showMessages)
+//  console.log(showMessages)
     
     return (
       <div className={style.main}>
