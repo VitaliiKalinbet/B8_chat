@@ -2,25 +2,51 @@ import React, { Component } from 'react';
 import styles from './Card.module.css';
 import moment from 'moment';
 import { FaPencilAlt, FaTimes } from 'react-icons/fa';
+import edit from '../img/edit.svg';
+import delIcon from '../img/delete.svg';
 
 class Card extends Component {
+state={
+    userObj:this.props.allUsers.find(el=>el.email===this.props.email),
+
+}
+        
   render() {
+    //   console.log(this.state.userObj.username)
+    //   console.log(this.props.avatarSrc)
     return (
-        <div className={styles.cardLeft}>
-            <p className={styles.icon}></p>
+        <div className={this.props.email===this.props.currentUser.email?styles.cardRight:styles.cardLeft}>
+        {/* <div className={styles.cardLeft}> */}
+            <p className={styles.icon}>
+            {this.props.avatarSrcFunction(this.props.email)}
+             </p>
             <div className={styles.message_wrapper}>
-                <ul className={styles.message_infoLeft}>
-                    <li className={styles.name}>{this.props.author}</li>
-                    <li className={styles.time}>{moment.unix(this.props.time).format('llll')}</li>
+                <ul className={this.props.email===this.props.currentUser.email?styles.message_infoRight:styles.message_infoLeft}>
+                    <li className={styles.name}>{this.state.userObj.username}</li>
+                    <li className={styles.time}>{moment(this.props.time).format('LLLL')}</li>
                 </ul>
-                <p className={styles.edited}>edited</p>
-                <p className={styles.text}>
+                {this.props.edited?
+                 <p className={this.props.email===this.props.currentUser.email?styles.editedRight:styles.editedLeft}>edited</p>
+                :null}
+                
+                <p className={this.props.email===this.props.currentUser.email?styles.textRight:styles.text}>
                     {this.props.content}
                 </p>
+                {this.props.email===this.props.currentUser.email?
                 <p className={styles.text_icon}>
-                    <span className={styles.text_icon_span}> <FaPencilAlt/> edit</span>
-                    <span className={styles.text_icon_span}> <FaTimes/> delete</span>
-                </p>
+                    <span id={this.props.messageId} 
+                    className={styles.text_icon_span}
+                    onClick={this.props.editMessage}> 
+                    <img src={edit} className={styles.text_image_span} alt='edit' id={this.props.messageId}/>
+                    {/* <FaPencilAlt id={this.props.messageId}/> */}
+                    edit
+                    </span>
+                    <span id={this.props.messageId} className={styles.text_icon_span} onClick={this.props.deleteMessage}>
+                    <img src={delIcon} className={styles.text_image_span}  alt='delete' id={this.props.messageId}/>
+                    {/* <FaTimes id={this.props.messageId}/> */}
+                    delete</span>
+                </p>:null}
+                
             </div>
         </div>
     );

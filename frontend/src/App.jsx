@@ -29,6 +29,31 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    //код Катя
+    window.socket.on("all-channels", (data) => {
+      if (this.props.currentChannel === null) {
+        let currentChannel = data.allChannels.find(el => el.channelName === 'General')
+        this.props.setAllChannels(data.allChannels)
+        this.props.setCurrentChannel(currentChannel)
+
+          this.setState({
+            // channels: data.channels,
+            // currentChannel: data.channels.find(el => el.channelName === 'General'),
+            // online: data.online,
+            // usersOnline: [...data.usersOnline],
+            // userId: data.clientId,
+        })
+      } else {
+        //почему здесь просто data?
+        let currentChannel =  data.find(el => this.props.currentChannel._id === el._id)
+        console.log(currentChannel);
+        this.props.setAllChannels(data)
+        this.props.setCurrentChannel(currentChannel)
+      }
+  })
+
+
     // if(!this.state.modal) {
     //   this.props.history.push('/')
     // } else {
@@ -71,9 +96,9 @@ class App extends Component {
         this.props.setCurrentUser(obj)
       })
 
-      window.socket.on('all-channels', (data) => {
-        this.props.setAllChannels(data)
-      })
+      // window.socket.on('all-channels', (data) => {
+      //   this.props.setAllChannels(data)
+      // })
 
       window.socket.on('all-users', (data) => {
         this.props.setAllUsers(data)
