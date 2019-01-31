@@ -3,8 +3,17 @@ import style from './userPanel.module.css';
 import Modal from '../sidePanelModal/modal';
 import AvatarEditor from 'react-avatar-editor';
 import { FaEllipsisH } from 'react-icons/fa';
+import { connect } from 'react-redux'
+import { withRouter} from 'react-router-dom';
+import md5 from 'md5'
 
-export default class UserPanel extends Component {
+import {removeAllChannels} from '../redux/actions/allChannelsAction';
+import {removeAllUsers} from '../redux/actions/allUsersAction';
+import {removeCurrentChannel} from '../redux/actions/currentChannelAction';
+import {removeCurrentUser} from '../redux/actions/currentUserAction';
+
+
+class UserPanel extends Component {
 
     state = {
         dropdown: false,
@@ -22,7 +31,10 @@ export default class UserPanel extends Component {
 
     toggleModal = () => {
         this.setState(prev => ({
-            showModal: !prev.showModal
+            showModal: !prev.showModal,
+            previewImage: '',
+            croppedImage: '',
+            blob: '',
         }));
     }
 
@@ -49,23 +61,45 @@ export default class UserPanel extends Component {
         }
     };
 
+    funcChangeAvatar = () => {
+        if (this.state.previewImage) {
+          let obj = {
+            id: this.props.currentUser._id,
+            img: this.state.previewImage,
+          }
+        window.socket.emit('change-user-avatar', obj)
+        this.toggleModal()
+        }
+    }
+
+    signOut = () => {
+        this.props.removeAllChannels()
+        this.props.removeAllUsers()
+        this.props.removeCurrentUser()
+        this.props.removeCurrentChannel()
+        this.props.history.push('/login')
+        window.socket.emit('user-sign-out', this.props.clientId)
+    }
+
     render() {
-        const imageSrc = 'https://cdn.vox-cdn.com/thumbor/TiwabydzgLgAVBjjJvAO_dnKo_o=/0x16:1103x751/1200x800/filters:focal(0x16:1103x751)/cdn.vox-cdn.com/uploads/chorus_image/image/46840054/Screenshot_2015-07-27_15.11.13.0.0.png';
+
+        // const imageSrc = 'https://cdn.vox-cdn.com/thumbor/TiwabydzgLgAVBjjJvAO_dnKo_o=/0x16:1103x751/1200x800/filters:focal(0x16:1103x751)/cdn.vox-cdn.com/uploads/chorus_image/image/46840054/Screenshot_2015-07-27_15.11.13.0.0.png';
         let { dropdown, showModal, previewImage, croppedImage } = this.state;
+        const { currentUser } = this.props;
         return (
             <div className={style.wrapper}>
                 <div className={style.avatarAndUsername}>
-                    <img className={style.avatar} src={imageSrc} alt='avatar' />
-                    <span className={style.userName}>Valentine</span>
+                    <img className={style.avatar} src={currentUser.avatar ? currentUser.avatar : `http://gravatar.com/avatar/${md5(currentUser.username)}?d=identicon`} alt='avatar' />
+                    <span className={style.userName}>{currentUser.username}</span>
                 </div>
                 <div className={style.dropdownWrapper}>
                     <FaEllipsisH onClick={this.toggleDropdown} className={style.dropdownBtn}/>
                     {dropdown && <div className={style.dropdownList} onClick={this.toggleDropdown}>
-                        <span><i className="fa fa-sign-out"></i> Sign Out</span>
+                        <span onClick={this.signOut}><i className="fa fa-sign-out" ></i> Sign Out</span>
                         <span onClick={this.toggleModal}><i className="fa fa-image"></i> Change Avatar</span>
                     </div>}
                 </div>
-                {showModal && <Modal toggleModal={this.toggleModal} name={'Change avatar'} >
+                {showModal && <Modal toggleModal={this.toggleModal} name={'Change avatar'} func={this.funcChangeAvatar}>
                     <input className={style.btn} type="file" onChange={this.handleChange} />
                     {previewImage && <div className={style.previewBloack}>
                         {previewImage && this.handleCropImage()}
@@ -77,7 +111,7 @@ export default class UserPanel extends Component {
                             height={120}
                             border={50}
                             scale={1.2} />
-                        <span><i><i style={{ fontSize: '3rem', color: '#273247' }} class="fa fa-arrow-circle-o-right"></i></i></span>
+                        <span><i><i style={{ fontSize: '3rem', color: '#273247' }} className="fa fa-arrow-circle-o-right"></i></i></span>
                         {croppedImage && <img className={style.prevImg} src={croppedImage} alt='prev img' />}
                     </div>}
                 </Modal>}
@@ -85,3 +119,32 @@ export default class UserPanel extends Component {
         )
     }
 }
+
+function MSTP (state) {
+    return {
+        // allChannels: state.allChannels,
+        // allUsers: state.allUsers,
+        // currentChannel:state.currentChannel,
+        currentUser : state.currentUser,
+        clientId: state.clientId,
+    }
+}
+
+function MDTP (dispatch) {
+    return {
+        removeAllChannels: function(){
+            dispatch(removeAllChannels())
+        },
+        removeAllUsers: function(){
+            dispatch(removeAllUsers())
+        },
+        removeCurrentChannel: function (){
+            dispatch(removeCurrentChannel())
+        },
+        removeCurrentUser: function(){
+            dispatch(removeCurrentUser())
+        },
+    }
+  }
+
+export default withRouter(connect(MSTP, MDTP)(UserPanel));

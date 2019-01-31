@@ -8,6 +8,8 @@ import { MdStar } from "react-icons/md";
 import uuidv4 from 'uuid/v4';
 import deleteIcon from '../img/delete_blue.svg';
 
+// import { IconContext } from "react-icons";
+
 class LinkPanel extends Component {
 
   state = {

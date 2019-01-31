@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import style from './Register.module.css';
 import { FaUserAlt, FaEnvelope, FaUnlockAlt } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
+// import md5 from 'md5';
+import uuidv4 from 'uuid'
 
 class Register extends Component {
 
@@ -21,38 +23,65 @@ class Register extends Component {
     })
   }
 
-  isPasswordValid = ({password, passwordConfirm}) => {
-    return password === passwordConfirm;
-  }
+  // isPasswordValid = ({password, passwordConfirm}) => {
+  //   return password === passwordConfirm;
+  // }
 
-  isFormValid = (e) => {
-    e.preventDefault();
-    let errors = [];
-    let error;
-    if(!this.isPasswordValid(this.state)){
-      error = {
-        message: 'Password is invalid'
-      };
-      this.setState({
-        errors: errors.concat(error)
-      })
-      return false;
+  // isFormValid = (e) => {
+  //   e.preventDefault();
+  //   let errors = [];
+  //   let error;
+  //   if(!this.isPasswordValid(this.state)){
+  //     error = {
+  //       message: 'Password is invalid'
+  //     };
+  //     this.setState({
+  //       errors: errors.concat(error)
+  //     })
+  //     return false;
+  //   } else {
+  //     this.setState({
+  //       errors: []
+  //     })
+  //     return true
+
+  registrationToChat = (e) => {
+    e.preventDefault()
+    // console.log('bbb')
+    if (this.state.password === this.state.passwordConfirm) {
+      // console.log('aaaa')
+       let user = {
+        username: this.state.name,
+        password: this.state.password,
+        email: this.state.email,
+        // avatar: `http://gravatar.com/avatar/${md5(this.state.user)}?d=identicon`,
+        links: [{
+            linkName: 'Google search',
+            url: 'https://www.google.com/webhp',
+            iconName: 'FaGoogle',
+            linkId: uuidv4()
+        }]
+        }
+        console.log(user)
+      window.socket.emit('registration', user)
     } else {
       this.setState({
-        errors: []
+        error: 'Different password!'
       })
-      return true
     }
   }
 
   render() {
+
+    {this.props.clearInput && this.setState({ name: '', email: '', password: '', passwordConfirm: ''})}
+
     return (
       <div className={style.registration_page}>
 
           <div className={style.form_place}>
               <h2 className={style.emblema}>B8 chat</h2>
 
-              <form className={style.form} action="">
+              <form className={style.form} onSubmit={this.registrationToChat}>
 
                 <div className={style.div_input}>
                   <FaUserAlt className={style.icon_input} />
@@ -78,7 +107,9 @@ class Register extends Component {
 
               </form>
 
-              <p className={style.subtitle}>If you have an account ?        <NavLink className={style.subtitle_navlink} to='/login' >Log   in</NavLink>
+              <p className={style.subtitle}>If you have an account ?  
+                    
+              <NavLink to='/login' className={style.subtitle_navlink}>Log   in</NavLink>
               </p>
 
               {this.state.errors.length > 0 && (

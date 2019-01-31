@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './modal.module.css';
 
-const Modal = ({toggleModal, name, children}) => {
-    console.log(children);
+const Modal = ({toggleModal, name, children, func}) => {
+    // console.log(children);
     return (
         <div className={style.modalBackdrop} onClick={e => e.target.className.includes('modalBackdrop')? toggleModal(): null}>
             <div className={style.modalWrapper} >
@@ -13,7 +13,7 @@ const Modal = ({toggleModal, name, children}) => {
                     {children}
                 </div>
                 <div className={style.modalFooter}>
-                    <button className={`${style.btn} ${style.modalOkBtn}`}>Ok</button>
+                    <button className={`${style.btn} ${style.modalOkBtn}`} onClick={func}>Ok</button>
                     <button className={`${style.btn} ${style.modalCancelBtn}`} onClick={toggleModal}>Cancel</button>
                 </div>
             </div>

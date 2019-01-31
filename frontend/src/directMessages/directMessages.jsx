@@ -1,156 +1,71 @@
 import React, { Component } from 'react';
 import style from './directMessages.module.css';
 import { connect } from 'react-redux';
-import { setCurrentDirectUser } from '../redux/actions/actions.js';
+// import { setCurrentDirectUser } from '../redux/actions/allChannelsAction.js';
 import { FaCircle } from 'react-icons/fa';
-import avatar from '../img/avatar.jpg';
+import md5 from 'md5'
+import {setCurrentChannel} from '../redux/actions/currentChannelAction';
 
 class DirectMessages extends Component {
 
-  channels = [
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Bill',
-      id: 'id-111'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Arnold',
-      id: 'id-222'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Clara',
-      id: 'id-333'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Bill',
-      id: 'id-111'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Arnold',
-      id: 'id-222'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Clara',
-      id: 'id-333'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Bill',
-      id: 'id-111'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Arnold',
-      id: 'id-222'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Clara',
-      id: 'id-333'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Bill',
-      id: 'id-111'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Arnold',
-      id: 'id-222'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Clara',
-      id: 'id-333'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Bill',
-      id: 'id-111'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Arnold',
-      id: 'id-222'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Clara',
-      id: 'id-333'
-    },
-    {
-      avatar: '../img/avatar.jpg',
-      name: 'Sara',
-      id: 'id-444'
-    },
-  ]
-
   state = {
-    users:[],
+    usersOnline: [],
   }
 
-  componentDidMount() {
-    this.setState({users:this.channels})
+  componentDidMount() {  
+    window.socket.on("send-users-online", (usersOnline) => {
+      this.setState({
+        usersOnline: usersOnline
+      })
+    })
   }
 
-  changeDirectUser = (x) => {
-    this.props.setCurrentDirectUser(x);
-  };
+  checkOnline = (email) => {
+    let user = this.state.usersOnline.find(el => el.userEmail === email) 
+
+    if(user !== undefined){
+      return <FaCircle color='green'/>
+    } else  {
+      return <FaCircle color='white'/>
+    }
+  }
+
+  directMessages=(e)=> {
+ 
+    let arr = this.props.allChannels.filter(el => el.channelName === `${this.props.currentUser.email}/${e.target.id}` || el.channelName === `${e.target.id}/${this.props.currentUser.email}`)
+
+    if(arr.length === 0) {
+        let obj ={
+            channelName: `${this.props.currentUser.email}/${e.target.id}`,  
+            author: this.props.currentUser.email, 
+            type: 'privat',
+        }
+        // console.log(obj)
+        window.socket.emit('create-channel', obj)
+    } else {
+
+      let channel = this.props.allChannels.find(el => el.channelName === `${this.props.currentUser.email}/${e.target.id}` || el.channelName === `${e.target.id}/${this.props.currentUser.email}`)
+      // console.log(channel)
+      this.props.setCurrentChannel(channel)
+    }
+}
 
   render() {
-    let {users} = this.state;
+
     return (
       <div className={style.directMessagesWrapper}>
         <h4>Direct Messages</h4>
         <div className={style.line}></div>
         <ul className={style.directMessagesList}>
-          {users.length > 0 && users.map(x => <li onClick={() => {this.changeDirectUser(x)}} 
-          className={style.directMessagesItem} key={x.id}>
+          {this.props.allUsers.map(el => <li onClick={this.directMessages}
+          className={style.directMessagesItem} key={el._id} id={el.email}>
           {/* <i class="fa fa-circle" style={{color:'green'}}></i> */}
-          <FaCircle color='green'/>
-          <p className={style.pName_plus_avatar}>
-            {`${x.name}`}
-            <img className={style.avatar} src={avatar} alt="avatar"/>
+
+          {this.state.usersOnline && this.checkOnline(el.email)}
+
+          <p className={style.pName_plus_avatar} id={el.email}>
+            {el.username}
+            <img className={style.avatar} id={el.email} src={el.avatar ? el.avatar : `http://gravatar.com/avatar/${md5(el.username)}?d=identicon`} alt="avatar"/>
           </p>
           </li>)}
         </ul>
@@ -160,4 +75,33 @@ class DirectMessages extends Component {
   }
 }
 
-export default connect(null, {setCurrentDirectUser})(DirectMessages);
+function MSTP (state) {
+  return {
+      allChannels: state.allChannels,
+      allUsers: state.allUsers,
+      currentChannel: state.currentChannel,
+      currentUser : state.currentUser,
+  }
+}
+
+function MDTP (dispatch) {
+  return {
+      // setAllChannels: function (data){
+      //     dispatch(setAllChannels(data))
+      // },
+      // setAllUsers: function (data){
+      //   dispatch(setAllUsers(data))
+      // },
+      setCurrentChannel: function (data){
+          dispatch(setCurrentChannel(data))
+      },
+      // setCurrentUser: function (data){
+      //     dispatch(setCurrentUser(data))
+      // },
+      // setClientId: function(data){
+      //     dispatch(setClientId(data))
+      // },
+  }
+}
+
+export default connect(MSTP, MDTP)(DirectMessages);

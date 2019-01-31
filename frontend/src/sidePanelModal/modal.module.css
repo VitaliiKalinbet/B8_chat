@@ -7,7 +7,6 @@
     height: 100%; 
     background-color: rgba(0,0,0,0.4);
 }
-
 .modalWrapper {
     width: 40%;
     min-width: 20rem;
@@ -18,23 +17,19 @@
     transform: translate(-50%, -50%);
     border-radius: 0.3rem;
 }
-
 .modalHeader {
     background-color: #273247;
     border-radius: 0.3rem 0.3rem 0 0;
 }
-
 .modalHeader > h2 {
     color: #fff;
     font-size: 1.2rem;
     padding: 0.7rem;
 }
-
 .modalContent {
     font-size: 1.2rem;
     padding: 0.7rem;
 }
-
 .modalFooter {
     border-top: 1px solid rgb(238, 235, 235);
     padding: 0.4rem;
@@ -42,7 +37,6 @@
     justify-content: flex-end;
     
 }
-
 .btn {
     font-size: 1rem;
     min-width: 5rem;
@@ -56,8 +50,6 @@
     outline: none;
     color: #fff;
 }
-
-
 .btn:hover {
     background-color: #273247;
 }

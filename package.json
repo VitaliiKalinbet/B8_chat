@@ -1,22 +1,26 @@
 {
-  "name": "prog_blog",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "project pog blog",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently \"nodemon server.js\" \"cd frontend && npm start\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VitaliiKalinbet/PROG_BLOG.git"
-  },
-  "author": "Bootcamp8",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VitaliiKalinbet/PROG_BLOG/issues"
-  },
-  "homepage": "https://github.com/VitaliiKalinbet/PROG_BLOG#readme",
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^2.2.0"
   }
 }
