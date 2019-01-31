@@ -139,6 +139,7 @@ module.exports = io => {
                         username: user.username,
                         password: user.password,
                         email: user.email,
+                        links: user.link,
                     });  
                     const token = createToken({id: userDb._id, username: userDb.username});
                     // client.cookie('token', token, {
