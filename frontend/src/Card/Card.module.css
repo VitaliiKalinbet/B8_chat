@@ -10,13 +10,15 @@
 .cardRight {
   height: auto;
   display: flex;
+  justify-content: flex-start;
   flex-direction: row-reverse;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .icon{
   width: 46px;
   height: 37px;
-  background-color:#1f8efa;
   margin: 0 0.8rem;
   border-radius: 5px;
 }
@@ -47,9 +49,14 @@
 
 .text{
   font-size: 1rem;
-  width: 100%;
   height: auto;
   margin: 0.3rem 0;
+}
+.textRight {
+  font-size: 1rem;
+  height: auto;
+  margin: 0.3rem 0;
+  text-align:right;
 }
 
 .text_icon {
@@ -68,8 +75,12 @@
   color: #bac4c9;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+.text_image_span{
 
+  width:0.5rem;
+}
 .message_wrapper{
-  width: 88%;
+  width: 75%;
 }
