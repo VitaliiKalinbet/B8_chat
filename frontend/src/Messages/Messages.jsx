@@ -13,9 +13,6 @@ import { Picker } from 'emoji-mart';
 // import {setCurrentChannel} from '../redux/actions/currentChannelAction';
 // import {setCurrentUser} from '../redux/actions/currentUserAction';
 
-
-
-
 class Messages extends Component {
 
   state = {

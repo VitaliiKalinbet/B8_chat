@@ -19,8 +19,6 @@ window.socket = socket(window.location.origin, {
   path: "/chat/"
 }, {transports: ['websocket']});
 
-
-
 class App extends Component {
   
   state = {
@@ -52,7 +50,6 @@ class App extends Component {
         this.props.setCurrentChannel(currentChannel)
       }
   })
-
 
     // if(!this.state.modal) {
     //   this.props.history.push('/')

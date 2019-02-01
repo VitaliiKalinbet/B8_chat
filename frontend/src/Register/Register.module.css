@@ -138,4 +138,8 @@
         width: 95%;
         margin: auto;
     }
+
+    .input {
+        padding: 0.25rem 2rem 0.25rem 0;
+    }
 }
