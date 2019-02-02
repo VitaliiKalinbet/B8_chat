@@ -5,7 +5,9 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const cookieParser = require('cookie-parser');
-const config = require('./config')
+const config = require('./config');
+// const socketioJwt = require('socketio-jwt');
+const socketioJwt = require('socketio-jwt');
 
 // function auth (socket, next) {
 //     // Parse cookie
@@ -29,24 +31,53 @@ function createToken (body) {
     );
 }
 
-function checkAuth (client, next) {
-    passport.authenticate('jwt', { session: false }, (err, decryptToken, jwtError) => {
-        if(jwtError != void(0) || err != void(0)) return 'Some error!!!!';
-        client.user.decryptToken = decryptToken;
-        next();
-    })(client, next);
+function checkAuth (client) {
+    // console.log('bbb')
+
+    let decoder = jwt.decode(client)
+    console.log(decoder)
+
+    // passport.authenticate('jwt', { session: false }, function(err, decryptToken, jwtError) {
+    //     // console.log(decryptToken)
+    //     if(!err && !jwtError && decryptToken) {
+    //         console.log('ccc')
+    //         console.log(decryptToken)
+    //         return 'Some error!!!!';
+    //     } else {
+    //         console.log('eeee')
+    //         let _id = decryptToken.id;
+    //         let a = {username: decryptToken.username, id: decryptToken.id}
+    //         console.log('its decr token', a)  
+    //         return _id
+    //     }
+      
+    // })(client);
 }
 
 
-let online = 0;
+let online = 0; 
 let usersOnline = [];
 let message = {};
 let channels = [];
 let users = [];
 
 module.exports = io => {
+    // io.use(
+    //     socketioJwt.authorize({
+    //         secret: config.jwt.secretOrKey,
+    //         // handshake: true,
+    //     })
+    // );
     io.on('connection', (client) => {   
 
+        
+        // console.log('aaaaa', client.handshake.query.decoded_tocken.username);
+       
+        // let token = client.handshake.query.decoded_tocken;
+        // console.log('aaaaa', token)
+        // checkAuth(token)
+
+     
         client.on('new-user', () => {
             let allUsers = User.find()
                 allUsers.lean().exec(function(err,docs2) {
@@ -139,6 +170,7 @@ module.exports = io => {
                         username: user.username,
                         password: user.password,
                         email: user.email,
+                        links: user.link,
                     });  
                     const token = createToken({id: userDb._id, username: userDb.username});
                     // client.cookie('token', token, {
@@ -179,6 +211,8 @@ module.exports = io => {
                     // res.cookie('token', token, {
                     //     httpOnly: true
                     // });
+                    client.emit('cookie', token)
+
                     console.log("User connected");
                     console.log(++online); 
                     client.broadcast.emit("change-online", online)
@@ -190,6 +224,7 @@ module.exports = io => {
                         allChannels: channels,
                         online: online,
                         clientId: client.id,
+                        token: token,
                     };
                     client.emit('login-on-DB', message);
                     

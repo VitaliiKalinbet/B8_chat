@@ -155,7 +155,7 @@ class Messages extends Component {
 
     // console.log(this.props.currentUser)
     let showMessages = this.props.currentChannel.messages.filter(el=>el.content.toLowerCase().includes(this.state.search)?el:null)
- console.log(showMessages)
+//  console.log(showMessages)
     
     return (
       <div className={style.main}>

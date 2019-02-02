@@ -31,12 +31,12 @@ class Register extends Component {
         username: this.state.name,
         password: this.state.password,
         email: this.state.email,
-        links: [{
+        link: {
             linkName: 'Google search',
             url: 'https://www.google.com',
             iconName: 'FaGoogle',
             linkId: uuidv4()
-        }]
+        }
         }
         console.log(user)
         this.setState({

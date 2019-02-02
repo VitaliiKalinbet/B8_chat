@@ -26,9 +26,9 @@ class Message extends Component {
 
     avatarSrcFunction=(email)=>{
         let user = this.props.allUsers.find(item=>item.email===email)
-        console.log(user)
+        // console.log(user)
         if (user.avatar) {
-            console.log(user.avatar );
+            // console.log(user.avatar );
             return <img src={user.avatar} alt='user avatar' width='46px' height='auto' />
         }
         else {

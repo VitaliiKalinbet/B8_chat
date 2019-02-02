@@ -15,10 +15,16 @@ import {setCurrentUser} from './redux/actions/currentUserAction';
 import {setClientId} from './redux/actions/clientIdAction'
 
 import socket from "socket.io-client";
-window.socket = socket(window.location.origin, {
-  path: "/chat/"
-}, {transports: ['websocket']});
 
+// function readCookie() {
+//     let cookie = document.cookie.split('=');
+//     return cookie[1];
+// }
+
+window.socket = socket(window.location.origin, {
+  path: "/chat/",
+  // query: {token: readCookie()}
+}, {transports: ['websocket']});
 
 
 class App extends Component {
@@ -27,8 +33,23 @@ class App extends Component {
     clearInput: false,
     error: '',
   }
+  // createCookie = (key, value) => {
+  //       let cookie = `${escape(key)}=${escape(value)};`;
+    
+  //       document.cookie = cookie;
+  //       console.log(cookie);
+  //       console.log(`Creating new cookie with
+  //       key: ${key}
+  //       value: ${value}`
+  //       );
+  //   }
+
 
   componentDidMount() {
+    // window.socket.on('cookie', token => {
+    //   // console.log(token)
+    //   this.createCookie('token', token);
+    // })
 
     //код Катя
     window.socket.on("all-channels", (data) => {
@@ -37,13 +58,13 @@ class App extends Component {
         this.props.setAllChannels(data.allChannels)
         this.props.setCurrentChannel(currentChannel)
 
-          this.setState({
-            // channels: data.channels,
-            // currentChannel: data.channels.find(el => el.channelName === 'General'),
-            // online: data.online,
-            // usersOnline: [...data.usersOnline],
-            // userId: data.clientId,
-        })
+        //   this.setState({
+        //     // channels: data.channels,
+        //     // currentChannel: data.channels.find(el => el.channelName === 'General'),
+        //     // online: data.online,
+        //     // usersOnline: [...data.usersOnline],
+        //     // userId: data.clientId,
+        // })
       } else {
         //почему здесь просто data?
         let currentChannel =  data.find(el => this.props.currentChannel._id === el._id)
@@ -71,6 +92,7 @@ class App extends Component {
 
     window.socket.on('login-on-DB', (data) => {
       if (data.message === 'User login success') {
+
       this.props.history.push('/')
       this.setDataToRedux(data)
         } else {
@@ -106,7 +128,8 @@ class App extends Component {
   }
 
   setDataToRedux = async(data) => {
-
+    // console.log(data)
+    // this.createCookie('token', data.token);
     let currentChannel = data.allChannels.find(el => el.channelName === 'General')
 
     await this.props.setAllChannels(data.allChannels)
@@ -174,3 +197,5 @@ function MDTP (dispatch) {
 }
 
 export default withRouter(connect(MSTP, MDTP)(App));
+
+
