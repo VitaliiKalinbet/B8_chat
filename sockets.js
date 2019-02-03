@@ -70,7 +70,6 @@ module.exports = io => {
     // );
     io.on('connection', (client) => {   
 
-        
         // console.log('aaaaa', client.handshake.query.decoded_tocken.username);
        
         // let token = client.handshake.query.decoded_tocken;

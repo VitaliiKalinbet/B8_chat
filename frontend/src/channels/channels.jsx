@@ -4,14 +4,13 @@ import Modal from '../sidePanelModal/modal';
 
 import { connect } from 'react-redux';
 import { FaPlus } from 'react-icons/fa';
-import {setCurrentChannel} from '../redux/actions/currentChannelAction';
+import { setCurrentChannel } from '../redux/actions/currentChannelAction';
 
 class Channels extends Component {
 
   state = {
     showModal: false,
     modalInputName: '',
-    // modalInputDescription: '',
   }
 
   componentDidMount(){
@@ -49,7 +48,6 @@ class Channels extends Component {
         showModal: false,
         modalInputName: '',
     })
-    // console.log(obj)
     window.socket.emit('create-channel', obj)
 }
 
@@ -79,7 +77,6 @@ class Channels extends Component {
 function MSTP (state) {
   return {
       allChannels: state.allChannels,
-      // allUsers: state.allUsers,
       currentChannel: state.currentChannel,
       currentUser : state.currentUser,
   }

@@ -27,7 +27,6 @@ class Chat extends Component {
     }
 
     closeSidePanel = (e) => {
-        // console.log('works closeSidePanel');
         this.setState({
             toggleSidePanel: false,
         })
@@ -40,7 +39,6 @@ class Chat extends Component {
     }
 
     closeLinkPanel = (e) => {
-        // console.log('works closeLinkPanel');
         this.setState({
             toggleLinkPanel: false,
         })
@@ -48,7 +46,7 @@ class Chat extends Component {
 
     componentDidMount() {
         window.socket.on("channel-created", (obj) => {
-            console.log(obj)
+            // console.log(obj)
            this.props.setCurrentChannel(obj)
         })
     }
@@ -104,18 +102,9 @@ function MSTP (state) {
 
 function MDTP (dispatch) {
   return {
-    //   setAllChannels: function (data){
-    //       dispatch(setAllChannels(data))
-    //   },
-    //   setAllUsers: function (data){
-    //     dispatch(setAllUsers(data))
-    //   },
         setCurrentChannel: function (data){
           dispatch(setCurrentChannel(data))
       },
-    //     setCurrentUser: function (data){
-    //       dispatch(setCurrentUser(data))
-    //   },
   }
 }
 

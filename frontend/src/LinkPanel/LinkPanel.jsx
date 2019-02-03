@@ -8,8 +8,6 @@ import { MdStar } from "react-icons/md";
 import uuidv4 from 'uuid/v4';
 import deleteIcon from '../img/delete_blue.svg';
 
-// import { IconContext } from "react-icons";
-
 class LinkPanel extends Component {
 
   state = {
@@ -156,7 +154,6 @@ class LinkPanel extends Component {
           </div>
         </div>
         {showModal && <Modal toggleModal={this.toggleModal} changeFunction={this.changeFunction} name={'Add new channel'} imgActive={imgActive} modalInputLink={modalInputLink} modalInputName={modalInputName}>
-          {/* <form> */}
             <input required className={style.modalInput} value={modalInputName} onChange={this.handleChange} type="text" name='modalInputName' placeholder='Enter name of link url ' />
             <input required className={style.modalInput} value={modalInputLink} onChange={this.handleChange} type="text" name='modalInputLink' placeholder='Enter link url' />
             <h4>Choose the icon:</h4>
@@ -165,7 +162,6 @@ class LinkPanel extends Component {
               <li onClick={() => this.activeSvg(el.id)} key={el.id} className={imgActive === el.id ? `${style.svgLink}` : `${style.svgFalse}`}>{el.url}
               </li>)}
             </ul>
-          {/* </form> */}
         </Modal>}
       </div>
     );

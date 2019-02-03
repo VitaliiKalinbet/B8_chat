@@ -6,16 +6,7 @@ import Message from '../Message/Message';
 import uuidv4 from 'uuid';
 import {setAllChannels} from '../redux/actions/allChannelsAction';
 import {connect} from 'react-redux';
-// import {setAllUsers, removeAllUsers,updateAllUsers} from '../redux/actions/allUsersAction';
-// import {setCurrentChannel} from '../redux/actions/currentChannelAction';
-// import {setCurrentUser} from '../redux/actions/currentUserAction';
 
-
-//Баги frontenda
-// 1) нет скрола для поля сообщений
-// 2) при нажатии на иконку не считывается id
-// 3) классы работают плохо лево право
-// 4) время отображается не корректно
 
 class Messages extends Component {
 
@@ -140,22 +131,10 @@ class Messages extends Component {
     }
   }
 
-//   handleKeyDown = (e) => {
-    
-//     if (e.keyCode === 13) {
-//       console.log('hello world')
-//       //  this.sendMessageToChannel();
-//     }
-// }
-
-
-
 
   render() {
 
-    // console.log(this.props.currentUser)
     let showMessages = this.props.currentChannel.messages.filter(el=>el.content.toLowerCase().includes(this.state.search)?el:null)
-//  console.log(showMessages)
     
     return (
       <div className={style.main}>
@@ -163,8 +142,8 @@ class Messages extends Component {
           <FaBars onClick={this.props.showSidePanel} className={style.additionalButton}/>
           <div className={style.header}>
             <div className={style.headerName}>
-              <h2 className={style.name}>B8 chat/{this.props.currentChannel.type === 'public' ? this.props.currentChannel.channelName : this.getChannelName()}  </h2>
-              <p className={style.members}>{this.uniqueNames(this.props.currentChannel.messages)} members</p>
+              <h2 className={style.name}>{this.props.currentChannel.type === 'public' ? this.props.currentChannel.channelName : this.getChannelName()}  </h2>
+              <p className={style.members}>{this.props.currentChannel.type === 'public' ? this.uniqueNames(this.props.currentChannel.messages) : 2} members</p>
             </div>
             <form className={style.headerForm} onSubmit={this.formSubmit}>
               <FaSistrix className={style.searchImg} />

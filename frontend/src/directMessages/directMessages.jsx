@@ -59,7 +59,6 @@ class DirectMessages extends Component {
         <ul className={style.directMessagesList}>
           {this.props.allUsers.sort((a, b) => a.username !== b.username ? a.username < b.username ? -1 : 1 : 0).map(el => <li
           className={style.directMessagesItem} key={el._id} id={el.email}>
-          {/* <i class="fa fa-circle" style={{color:'green'}}></i> */}
 
           {this.state.usersOnline && this.checkOnline(el.email)}
 
@@ -86,21 +85,9 @@ function MSTP (state) {
 
 function MDTP (dispatch) {
   return {
-      // setAllChannels: function (data){
-      //     dispatch(setAllChannels(data))
-      // },
-      // setAllUsers: function (data){
-      //   dispatch(setAllUsers(data))
-      // },
       setCurrentChannel: function (data){
           dispatch(setCurrentChannel(data))
       },
-      // setCurrentUser: function (data){
-      //     dispatch(setCurrentUser(data))
-      // },
-      // setClientId: function(data){
-      //     dispatch(setClientId(data))
-      // },
   }
 }
 
