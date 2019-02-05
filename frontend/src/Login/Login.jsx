@@ -9,6 +9,7 @@ class Login extends Component {
     email: '',
     password: '',
     // errors: [{message: 'Server error!!!'}],
+    isLoading: false,
   }
 
   handelChange = (e) => {
@@ -25,12 +26,29 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     }
-    window.socket.emit('login', user)
+    window.socket.emit('login', user);
+    this.setState({
+      isLoading: true,
+    })
+  }
+
+  toggleIsLoading = () => {
+    this.setState({
+      isLoading: false,
+    })
+  }
+
+  componentDidUpdate(prevProps){   
+    if (prevProps !== this.props) {
+        if (this.props.isError) {
+          this.toggleIsLoading()
+        }
+    }
   }
 
   render() {
 
-    {this.props.clearInput && this.setState({email: '', password: ''})}
+    // {this.props.clearInput && this.setState({email: '', password: ''})}
 
     return (
       <div className={style.registration_page}>
@@ -50,7 +68,7 @@ class Login extends Component {
                   <input className={style.input} type="password" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' required/>
                 </div>
                                    
-                <input className={style.submit_btn} type="submit" value="Log in" />
+                <input className={style.submit_btn} type="submit" value = {this.state.isLoading ? "Loading..." : "Log in"}  />
 
               </form>
 

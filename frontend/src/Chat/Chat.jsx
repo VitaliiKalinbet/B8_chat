@@ -54,7 +54,7 @@ class Chat extends Component {
     }
 
    componentDidUpdate(prevProps){   
-        if (prevProps !== this.props) {
+        if (prevProps.currentUser.username !== this.props.currentUser.username) {
             if (this.props.allChannels.length && this.props.allUsers.length && this.props.currentUser.username && this.props.currentChannel.channelName) {
                 this.setState({
                     isLoading: false

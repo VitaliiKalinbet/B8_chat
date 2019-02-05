@@ -24,6 +24,7 @@ class App extends Component {
   state = {
     clearInput: false,
     error: '',
+    isError: false,
   }
 
   componentDidMount() {
@@ -73,6 +74,7 @@ class App extends Component {
         } else {
           this.setState({
             error: data.message,
+            isError: true,
           })
         }
       })
@@ -133,8 +135,8 @@ class App extends Component {
     return (
        <Switch>
          <Route exact path='/' render={(props) => <Chat {...props} clearInput={this.state.clearInput}/>} />
-         <Route path='/login' render={(props) => <Login {...props} error={this.state.error} clearError={this.clearError}/>}/>
-         <Route path='/registration' render={(props) => <Register {...props} error={this.state.error} clearError={this.clearError}/>}/>
+         <Route path='/login' render={(props) => <Login {...props} isError={this.state.isError} error={this.state.error} clearError={this.clearError}/>}/>
+         <Route path='/registration' render={(props) => <Register {...props} isError={this.state.isError} error={this.state.error} clearError={this.clearError}/>}/>
        </Switch>
     );
   }

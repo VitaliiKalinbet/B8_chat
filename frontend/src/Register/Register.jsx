@@ -12,6 +12,7 @@ class Register extends Component {
     password: '',
     passwordConfirm: '',
     error: '',
+    isLoading: false,
   }
 
   handelChange = (e) => {
@@ -40,7 +41,8 @@ class Register extends Component {
         }
         console.log(user)
         this.setState({
-          error: ''
+          error: '',
+          isLoading: true,
         })
       window.socket.emit('registration', user)
     } else {
@@ -50,9 +52,23 @@ class Register extends Component {
     }
   }
 
+  toggleIsLoading = () => {
+    this.setState({
+      isLoading: false,
+    })
+  }
+
+  componentDidUpdate(prevProps){   
+    if (prevProps !== this.props) {
+        if (this.props.isError) {
+          this.toggleIsLoading()
+        }
+    }
+  }
+
   render() {
 
-    {this.props.clearInput && this.setState({ name: '', email: '', password: '', passwordConfirm: '', error: ''})}
+    // {this.props.clearInput && this.setState({ name: '', email: '', password: '', passwordConfirm: '', error: ''})}
 
     return (
       <div className={style.registration_page}>
@@ -82,7 +98,7 @@ class Register extends Component {
                   <input className={style.input} type="password" name="passwordConfirm" value={this.props.telephone} onChange={this.handelChange} placeholder='Confirm password' />
                 </div>
                   
-                <input onClick={this.isFormValid} className={style.submit_btn} type="submit" value="Registration" />
+                <input onClick={this.isFormValid} className={style.submit_btn} type="submit" value={this.state.isLoading ? "Loading..." : "Registration"} />
 
               </form>
 
