@@ -170,7 +170,7 @@ class Messages extends Component {
           <form className={style.messageForm} onSubmit={this.sendMessageToChannel}>
             <MdAttachFile className={style.addFile} />
             <input type="text" placeholder='Enter the message' name='message' value={this.state.message} onChange={this.handlerChange} className={style.messageInput}  onKeyDown = {this.handleKeyDown}/>
-            <FaRegSmile className={style.smile} />
+            {/* <FaRegSmile className={style.smile} /> */}
             <MdSend className={style.send} onClick={this.sendMessageToChannel} />
           </form>
         </div>

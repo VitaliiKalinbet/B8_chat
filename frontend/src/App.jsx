@@ -8,8 +8,8 @@ import Login from './Login/Login';
 // import style from './App.module.css';
 
 import {connect} from 'react-redux';
-import {setAllChannels, removeAllChannels, updateAllChannels} from './redux/actions/allChannelsAction';
-import {setAllUsers, removeAllUsers,updateAllUsers} from './redux/actions/allUsersAction';
+import {setAllChannels} from './redux/actions/allChannelsAction';
+import {setAllUsers} from './redux/actions/allUsersAction';
 import {setCurrentChannel} from './redux/actions/currentChannelAction';
 import {setCurrentUser} from './redux/actions/currentUserAction';
 
