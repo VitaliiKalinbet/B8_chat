@@ -1,8 +1,7 @@
 import React from 'react';
 import style from './ModalLinkPanel.module.css';
 
-const Modal = ({changeFunction, modalInputName, modalInputLink, imgActive, children, toggleModal}) => {
-    console.log(modalInputLink);
+const Modal = ({changeFunction, children, toggleModal}) => {
     return (
         <div className={style.modalBackdrop} >
             <div className={style.modalWrapper} >

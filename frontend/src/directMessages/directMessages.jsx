@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import style from './directMessages.module.css';
 import { connect } from 'react-redux';
-// import { setCurrentDirectUser } from '../redux/actions/allChannelsAction.js';
 import { FaCircle } from 'react-icons/fa';
 import md5 from 'md5'
-import {setCurrentChannel} from '../redux/actions/currentChannelAction';
+import { setCurrentChannel } from '../redux/actions/currentChannelAction';
 
 class DirectMessages extends Component {
 
@@ -12,7 +11,7 @@ class DirectMessages extends Component {
     usersOnline: [],
   }
 
-  componentDidMount() {  
+  componentDidMount() {
     window.socket.on("send-users-online", (usersOnline) => {
       this.setState({
         usersOnline: usersOnline
@@ -21,34 +20,28 @@ class DirectMessages extends Component {
   }
 
   checkOnline = (email) => {
-    let user = this.state.usersOnline.find(el => el.userEmail === email) 
-
-    if(user !== undefined){
-      return <FaCircle color='green' id={email}/>
-    } else  {
-      return <FaCircle color='white' id={email}/>
+    let user = this.state.usersOnline.find(el => el.userEmail === email)
+    if (user !== undefined) {
+      return <FaCircle color='green' id={email} />
+    } else {
+      return <FaCircle color='white' id={email} />
     }
   }
 
-  directMessages=(e)=> {
- 
+  directMessages = (e) => {
     let arr = this.props.allChannels.filter(el => el.channelName === `${this.props.currentUser.email}/${e.target.id}` || el.channelName === `${e.target.id}/${this.props.currentUser.email}`)
-
-    if(arr.length === 0) {
-        let obj ={
-            channelName: `${this.props.currentUser.email}/${e.target.id}`,  
-            author: this.props.currentUser.email, 
-            type: 'privat',
-        }
-        // console.log(obj)
-        window.socket.emit('create-channel', obj)
+    if (arr.length === 0) {
+      let obj = {
+        channelName: `${this.props.currentUser.email}/${e.target.id}`,
+        author: this.props.currentUser.email,
+        type: 'privat',
+      }
+      window.socket.emit('create-channel', obj)
     } else {
-
       let channel = this.props.allChannels.find(el => el.channelName === `${this.props.currentUser.email}/${e.target.id}` || el.channelName === `${e.target.id}/${this.props.currentUser.email}`)
-      // console.log(channel)
       this.props.setCurrentChannel(channel)
     }
-}
+  }
 
   render() {
 
@@ -58,49 +51,36 @@ class DirectMessages extends Component {
         <div className={style.line}></div>
         <ul className={style.directMessagesList}>
           {this.props.allUsers.sort((a, b) => a.username !== b.username ? a.username < b.username ? -1 : 1 : 0).map(el => <li
-          className={style.directMessagesItem} key={el._id} id={el.email}>
-          {/* <i class="fa fa-circle" style={{color:'green'}}></i> */}
+            className={style.directMessagesItem} key={el._id} id={el.email}>
 
-          {this.state.usersOnline && this.checkOnline(el.email)}
+            {this.state.usersOnline && this.checkOnline(el.email)}
 
-          <p className={style.pName_plus_avatar} id={el.email} onClick={this.directMessages}>
-            {el.username}
-            <img className={style.avatar} id={el.email} src={el.avatar ? el.avatar : `http://gravatar.com/avatar/${md5(el.username)}?d=identicon`} alt="avatar"/>
-          </p>
+            <p className={style.pName_plus_avatar} id={el.email} onClick={this.directMessages}>
+              {el.username}
+              <img className={style.avatar} id={el.email} src={el.avatar ? el.avatar : `http://gravatar.com/avatar/${md5(el.username)}?d=identicon`} alt="avatar" />
+            </p>
           </li>)}
         </ul>
-        
+
       </div>
     )
   }
 }
 
-function MSTP (state) {
+function MSTP(state) {
   return {
-      allChannels: state.allChannels,
-      allUsers: state.allUsers,
-      currentChannel: state.currentChannel,
-      currentUser : state.currentUser,
+    allChannels: state.allChannels,
+    allUsers: state.allUsers,
+    currentChannel: state.currentChannel,
+    currentUser: state.currentUser,
   }
 }
 
-function MDTP (dispatch) {
+function MDTP(dispatch) {
   return {
-      // setAllChannels: function (data){
-      //     dispatch(setAllChannels(data))
-      // },
-      // setAllUsers: function (data){
-      //   dispatch(setAllUsers(data))
-      // },
-      setCurrentChannel: function (data){
-          dispatch(setCurrentChannel(data))
-      },
-      // setCurrentUser: function (data){
-      //     dispatch(setCurrentUser(data))
-      // },
-      // setClientId: function(data){
-      //     dispatch(setClientId(data))
-      // },
+    setCurrentChannel: function (data) {
+      dispatch(setCurrentChannel(data))
+    }
   }
 }
 

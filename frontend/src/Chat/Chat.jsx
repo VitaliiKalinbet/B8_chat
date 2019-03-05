@@ -6,10 +6,9 @@ import LinkPanel from '../LinkPanel/LinkPanel.jsx'
 import Loader from 'react-loader-spinner';
 import style2 from '../App.module.css';
 
-import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import {setCurrentChannel} from '../redux/actions/currentChannelAction';
-
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { setCurrentChannel } from '../redux/actions/currentChannelAction';
 
 class Chat extends Component {
 
@@ -27,7 +26,6 @@ class Chat extends Component {
     }
 
     closeSidePanel = (e) => {
-        // console.log('works closeSidePanel');
         this.setState({
             toggleSidePanel: false,
         })
@@ -40,7 +38,6 @@ class Chat extends Component {
     }
 
     closeLinkPanel = (e) => {
-        // console.log('works closeLinkPanel');
         this.setState({
             toggleLinkPanel: false,
         })
@@ -48,22 +45,20 @@ class Chat extends Component {
 
     componentDidMount() {
         window.socket.on("channel-created", (obj) => {
-            console.log(obj)
-           this.props.setCurrentChannel(obj)
+            this.props.setCurrentChannel(obj)
         })
     }
 
-   componentDidUpdate(prevProps){   
+    componentDidUpdate(prevProps) {
         if (prevProps.currentUser.username !== this.props.currentUser.username) {
             if (this.props.allChannels.length && this.props.allUsers.length && this.props.currentUser.username && this.props.currentChannel.channelName) {
                 this.setState({
                     isLoading: false
                 })
             }
-        }  
+        }
         window.socket.on("channel-created", (obj) => {
-            console.log(obj)
-           this.props.setCurrentChannel(obj)
+            this.props.setCurrentChannel(obj)
         })
     }
 
@@ -71,53 +66,43 @@ class Chat extends Component {
         const { isLoading } = this.state
 
         return (
-            <div> {isLoading ?  
-                    <div className={style2.loader}>
-                        <Loader type="Watch" color="#1f8efa" height='100' width='100' />
-                    </div> 
-                    :   
+            <div> {isLoading ?
+                <div className={style2.loader}>
+                    <Loader type="Watch" color="#1f8efa" height='100' width='100' />
+                </div>
+                :
                 <div className={style.chat}>
 
-                    <SidePanel toggleSidePanel={this.state.toggleSidePanel}/>
-                    <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel ?style.divCloseSidePanel : null}></div>
+                    <SidePanel toggleSidePanel={this.state.toggleSidePanel} />
+                    <div onClick={this.closeSidePanel} className={this.state.toggleSidePanel ? style.divCloseSidePanel : null}></div>
 
-                    <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel}/>
+                    <Messages showSidePanel={this.showSidePanel} showLinkPanel={this.showLinkPanel} />
 
-                    <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel}/>
+                    <LinkPanel toggleLinkPanel={this.state.toggleLinkPanel} />
                     <div onClick={this.closeLinkPanel} className={this.state.toggleLinkPanel ? style.divCloseLinkPanel : null}></div>
-                    
-                </div> 
-        }
+
+                </div>
+            }
             </div>
         );
     }
 }
 
-function MSTP (state) {
-  return {
-      allChannels: state.allChannels,
-      allUsers: state.allUsers,
-      currentChannel: state.currentChannel,
-      currentUser : state.currentUser,
-  }
+function MSTP(state) {
+    return {
+        allChannels: state.allChannels,
+        allUsers: state.allUsers,
+        currentChannel: state.currentChannel,
+        currentUser: state.currentUser,
+    }
 }
 
-function MDTP (dispatch) {
-  return {
-    //   setAllChannels: function (data){
-    //       dispatch(setAllChannels(data))
-    //   },
-    //   setAllUsers: function (data){
-    //     dispatch(setAllUsers(data))
-    //   },
-        setCurrentChannel: function (data){
-          dispatch(setCurrentChannel(data))
-      },
-    //     setCurrentUser: function (data){
-    //       dispatch(setCurrentUser(data))
-    //   },
-  }
+function MDTP(dispatch) {
+    return {
+        setCurrentChannel: function (data) {
+            dispatch(setCurrentChannel(data))
+        }
+    }
 }
 
 export default withRouter(connect(MSTP, MDTP)(Chat));
-

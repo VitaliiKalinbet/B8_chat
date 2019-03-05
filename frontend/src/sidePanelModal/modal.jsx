@@ -1,10 +1,9 @@
 import React from 'react';
 import style from './modal.module.css';
 
-const Modal = ({toggleModal, name, children, func}) => {
-    // console.log(children);
+const Modal = ({ toggleModal, name, children, func }) => {
     return (
-        <div className={style.modalBackdrop} onClick={e => e.target.className.includes('modalBackdrop')? toggleModal(): null}>
+        <div className={style.modalBackdrop} onClick={e => e.target.className.includes('modalBackdrop') ? toggleModal() : null}>
             <div className={style.modalWrapper} >
                 <div className={style.modalHeader}>
                     <h2>{name}</h2>

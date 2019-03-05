@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import style from './Messages.module.css';
 import { FaRegSmile, FaSistrix, FaBars, FaChevronCircleLeft } from 'react-icons/fa';
-import { MdSend, MdAttachFile } from 'react-icons/md';
+import { MdSend } from 'react-icons/md';
 import Message from '../Message/Message';
 import uuidv4 from 'uuid';
-import {setAllChannels} from '../redux/actions/allChannelsAction';
-import {connect} from 'react-redux';
+import { setAllChannels } from '../redux/actions/allChannelsAction';
+import { connect } from 'react-redux';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-
-// import {setAllUsers, removeAllUsers,updateAllUsers} from '../redux/actions/allUsersAction';
-// import {setCurrentChannel} from '../redux/actions/currentChannelAction';
-// import {setCurrentUser} from '../redux/actions/currentUserAction';
 
 class Messages extends Component {
 
   state = {
     message: '',
     search: '',
-    newMessage:true,
-    editMessage:'',
+    newMessage: true,
+    editMessage: '',
     showEmoji: false,
   }
 
@@ -27,77 +23,68 @@ class Messages extends Component {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.scrollToBottom();
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     this.scrollToBottom();
   }
 
   deleteMessage = (e) => {
-  
     let id = e.target.id
-    // console.log(id);
-    let obj={
-        messageId:id ,
-        currentChannel: this.props.currentChannel._id,
+    let obj = {
+      messageId: id,
+      currentChannel: this.props.currentChannel._id,
     }
-    // console.log(obj)
-     window.socket.emit('deleteChannelMessage', obj)
+    window.socket.emit('deleteChannelMessage', obj)
   }
 
   editMessage = (e) => {
-      let id = e.target.id
-      // let message = this.state.messages.find(el => el.messageId === id)
-      let edit = this.props.currentChannel.messages.find(el => el.messageId === id)
-      this.setState({
-          message: edit.content,
-          newMessage: false,
-          editMessage: edit,
-      })
+    let id = e.target.id
+    let edit = this.props.currentChannel.messages.find(el => el.messageId === id)
+    this.setState({
+      message: edit.content,
+      newMessage: false,
+      editMessage: edit,
+    })
   }
 
-  sendMessageToChannel=(e)=> {
+  sendMessageToChannel = (e) => {
     e.preventDefault();
     if (this.state.newMessage) {
-        let message = {
-            time: Date.now(),
-            content: this.state.message,
-            author: this.props.currentUser.email,
-            messageId: uuidv4(),
-            edited: false,
-            }
-        let obj = {
-            message: message,
-            currentChannel: this.props.currentChannel._id
-        }
-        // console.log(obj)
-        this.setState({
-            message: '',
-            showEmoji: false,
-            // showEmoji: false,
-        })
-        window.socket.emit("channel-message", obj); 
+      let message = {
+        time: Date.now(),
+        content: this.state.message,
+        author: this.props.currentUser.email,
+        messageId: uuidv4(),
+        edited: false,
+      }
+      let obj = {
+        message: message,
+        currentChannel: this.props.currentChannel._id
+      }
+      this.setState({
+        message: '',
+        showEmoji: false,
+      })
+      window.socket.emit("channel-message", obj);
     } else {
-        let editMess = {...this.state.editMessage, content: this.state.message, edited: true}
-        // console.log(editMess)
-        this.setState(prev =>({
-            newMessage: true,
-            editMessage: {},
-            message: '',
-            showEmoji: false,
-        }))
+      let editMess = { ...this.state.editMessage, content: this.state.message, edited: true }
+      this.setState(prev => ({
+        newMessage: true,
+        editMessage: {},
+        message: '',
+        showEmoji: false,
+      }))
 
-        let obj={
-            message: editMess,
-            currentChannel: this.props.currentChannel._id,
-        }
-        // console.log(obj)
-        window.socket.emit("editChannelMessage", obj);    
+      let obj = {
+        message: editMess,
+        currentChannel: this.props.currentChannel._id,
+      }
+      window.socket.emit("editChannelMessage", obj);
     }
   }
-
 
   handlerChange = (e) => {
     this.setState({
@@ -105,87 +92,74 @@ class Messages extends Component {
     })
   }
 
-  uniqueNames=(arr)=> {
-    let  obj = {};
-      for (let i = 0; i < arr.length; i++) {
+  uniqueNames = (arr) => {
+    let obj = {};
+    for (let i = 0; i < arr.length; i++) {
       let str = arr[i].author;
       obj[str] = true; // запомнить строку в виде свойства объекта
     }
     let result = [...Object.keys(obj)];
     let usersCount = result.length;
 
-     return usersCount;
+    return usersCount;
   }
 
-  getChannelName=()=> {
-    if(this.props.currentChannel) {
-           let arr = this.props.currentChannel.channelName.split('/')
-           let arr2 = []
-          for(let el of this.props.allUsers) {
-              for(let ell of arr) {
-                 if(el.email === ell){
-                     arr2.push(el.username) 
-                  }
-              }
+  getChannelName = () => {
+    if (this.props.currentChannel) {
+      let arr = this.props.currentChannel.channelName.split('/')
+      let arr2 = []
+      for (let el of this.props.allUsers) {
+        for (let ell of arr) {
+          if (el.email === ell) {
+            arr2.push(el.username)
           }
-          let arr3 = arr2.filter(el => el !== this.props.currentUser.username)
-          if(arr3.length !== 0) {
-              return arr3[0]
-          } else {
-              return `${this.props.currentUser.username} (you)`
-          }
+        }
+      }
+      let arr3 = arr2.filter(el => el !== this.props.currentUser.username)
+      if (arr3.length !== 0) {
+        return arr3[0]
+      } else {
+        return `${this.props.currentUser.username} (you)`
+      }
     }
   }
 
   showEmoji = (e) => {
-		e.preventDefault();
-		this.setState(prev => ({
-			showEmoji: !prev.showEmoji,
-		}))
+    e.preventDefault();
+    this.setState(prev => ({
+      showEmoji: !prev.showEmoji,
+    }))
   }
-  
+
   addEmoji = (e) => {
-		//console.log(e.unified)
-		if (e.unified.length <= 5) {
-			let emojiPic = String.fromCodePoint(`0x${e.unified}`)
-			this.setState(prev => ({
-				message: prev.message + emojiPic
-			}))
-		} else {
-			let sym = e.unified.split('-')
-			let codesArray = []
-			sym.forEach(el => codesArray.push('0x' + el))
-			//console.log(codesArray.length)
-			//console.log(codesArray)  // ["0x1f3f3", "0xfe0f"]
-			let emojiPic = String.fromCodePoint(...codesArray)
-			this.setState(prev => ({
-				message: prev.message + emojiPic
-			}))
-		}
+    if (e.unified.length <= 5) {
+      let emojiPic = String.fromCodePoint(`0x${e.unified}`)
+      this.setState(prev => ({
+        message: prev.message + emojiPic
+      }))
+    } else {
+      let sym = e.unified.split('-')
+      let codesArray = []
+      sym.forEach(el => codesArray.push('0x' + el))
+      let emojiPic = String.fromCodePoint(...codesArray)
+      this.setState(prev => ({
+        message: prev.message + emojiPic
+      }))
+    }
   }
-  
-  formSubmit=(e)=>{
+
+  formSubmit = (e) => {
     e.preventDefault();
   }
 
-//   handleKeyDown = (e) => {
-    
-//     if (e.keyCode === 13) {
-//       console.log('hello world')
-//       //  this.sendMessageToChannel();
-//     }
-// }
-
   render() {
 
-    // console.log(this.props.currentUser)
-    let showMessages = this.props.currentChannel.messages.filter(el=>el.content.toLowerCase().includes(this.state.search)?el:null)
-//  console.log(showMessages)
-    
+    let showMessages = this.props.currentChannel.messages.filter(el => el.content.toLowerCase().includes(this.state.search) ? el : null)
+
     return (
       <div className={style.main}>
         <div className={style.headerMain}>
-          <FaBars onClick={this.props.showSidePanel} className={style.additionalButton}/>
+          <FaBars onClick={this.props.showSidePanel} className={style.additionalButton} />
           <div className={style.header}>
             <div className={style.headerName}>
               <h2 className={style.name}>B8 chat/{this.props.currentChannel.type === 'public' ? this.props.currentChannel.channelName : this.getChannelName()}  </h2>
@@ -196,21 +170,20 @@ class Messages extends Component {
               <input name='search' type="text" placeholder='Search...' className={style.search} value={this.state.search} onChange={this.handlerChange} />
             </form>
           </div>
-          <FaChevronCircleLeft onClick={this.props.showLinkPanel} className={style.additionalButton}/>
+          <FaChevronCircleLeft onClick={this.props.showLinkPanel} className={style.additionalButton} />
         </div>
         <div className={style.messages}>
           <div className={style.messagesArea}>
-          {/*отрисовываем сообщения */}
-            <Message  editMessage = {this.editMessage} deleteMessage={this.deleteMessage} allUsers = {this.props.allUsers} currentUser={this.props.currentUser} messages={showMessages}/>
+            {/*отрисовываем сообщения */}
+            <Message editMessage={this.editMessage} deleteMessage={this.deleteMessage} allUsers={this.props.allUsers} currentUser={this.props.currentUser} messages={showMessages} />
             <div ref={(el) => { this.messagesEnd = el; }}>
-                </div>
+            </div>
           </div>
           <form className={style.messageForm} onSubmit={this.sendMessageToChannel}>
-            {/* <MdAttachFile className={style.addFile} /> */}
-            <input required type="text" placeholder='Enter the message' name='message' value={this.state.message} onChange={this.handlerChange} className={style.messageInput}  onKeyDown = {this.handleKeyDown}/>
+            <input required type="text" placeholder='Enter the message' name='message' value={this.state.message} onChange={this.handlerChange} className={style.messageInput} onKeyDown={this.handleKeyDown} />
             <FaRegSmile onClick={this.showEmoji} className={style.smile} />
-            {this.state.showEmoji && 
-              <span className={style.emoji}> 
+            {this.state.showEmoji &&
+              <span className={style.emoji}>
                 <Picker set='emojione' style={{ width: '20rem', showPreview: 'false', position: 'absolute', bottom: '20px', right: '20px' }} i18n={{ categories: { search: 'Résultats de recherche', recent: 'Récents' } }} onSelect={this.addEmoji} />
               </span>}
             <MdSend className={style.send} onClick={this.sendMessageToChannel} />
@@ -221,20 +194,21 @@ class Messages extends Component {
   }
 }
 
-function MSTP (state) {
+function MSTP(state) {
   return {
-      allChannels: state.allChannels,
-      allUsers: state.allUsers,
-      currentChannel:state.currentChannel,
-      currentUser : state.currentUser,
+    allChannels: state.allChannels,
+    allUsers: state.allUsers,
+    currentChannel: state.currentChannel,
+    currentUser: state.currentUser,
   }
 }
-function MDTP (dispatch) {
+
+function MDTP(dispatch) {
   return {
-      setAllChannels: function (data){
-          dispatch(setAllChannels(data))
-      },
-    }
+    setAllChannels: function (data) {
+      dispatch(setAllChannels(data))
+    },
+  }
 }
 
-export default connect(MSTP, MDTP) (Messages);
+export default connect(MSTP, MDTP)(Messages);

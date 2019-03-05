@@ -11,12 +11,11 @@ class Channels extends Component {
   state = {
     showModal: false,
     modalInputName: '',
-    // modalInputDescription: '',
   }
 
   componentDidMount(){
     this.props.setActiveItemId('General')
-  }
+  };
 
   toggleModal = () => {
     this.setState(prev => ({
@@ -24,7 +23,7 @@ class Channels extends Component {
       modalInputName: '',
       modalInputDescription: ''
     }))
-  }
+  };
 
   handleChange = ({ target }) => {
     this.setState({
@@ -49,9 +48,8 @@ class Channels extends Component {
         showModal: false,
         modalInputName: '',
     })
-    // console.log(obj)
     window.socket.emit('create-channel', obj)
-}
+  };
 
   render() {
     let { showModal, modalInputName} = this.state;
@@ -66,7 +64,6 @@ class Channels extends Component {
         <div className={style.line}></div>
         {showModal && <Modal toggleModal={this.toggleModal} name={'Add new channel'} func={this.createChannel}>
           <input className={style.modalInput} value={modalInputName} onChange={this.handleChange} type="text" name='modalInputName' placeholder='Enter a channel name' />
-          {/* <input className={style.modalInput} value={modalInputDescription} onChange={this.handleChange} type="text" name='modalInputDescription' placeholder='Enter a channel description' /> */}
         </Modal>}
         <ul className={style.channelList}>
           {allChannels.sort((a, b) => a.channelName !== b.channelName ? a.channelName < b.channelName ? -1 : 1 : 0).sort((a, b) => a.channelName !== b.channelName ? a.channelName === 'General' ? -1 : 1 : 0).map(el => el.type === 'public' ? <li onClick={() => {this.changeCurrentChannel(el); this.props.setActiveItemId(el.channelName); }}
@@ -76,10 +73,10 @@ class Channels extends Component {
     )
   }
 }
+
 function MSTP (state) {
   return {
       allChannels: state.allChannels,
-      // allUsers: state.allUsers,
       currentChannel: state.currentChannel,
       currentUser : state.currentUser,
   }

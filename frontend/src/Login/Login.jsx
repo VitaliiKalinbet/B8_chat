@@ -8,7 +8,6 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    // errors: [{message: 'Server error!!!'}],
     isLoading: false,
   }
 
@@ -38,48 +37,36 @@ class Login extends Component {
     })
   }
 
-  componentDidUpdate(prevProps){   
+  componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-        if (this.props.isError) {
-          this.toggleIsLoading()
-        }
+      if (this.props.isError) {
+        this.toggleIsLoading()
+      }
     }
   }
 
   render() {
-
-    // {this.props.clearInput && this.setState({email: '', password: ''})}
-
     return (
       <div className={style.registration_page}>
-
-          <div className={style.form_place}>
-              <h2 className={style.emblema}>B8 chat</h2>
-
-              <form className={style.form} onSubmit={this.loginToChat}>
-
-                <div className={style.div_input}>
-                  <FaEnvelope className={style.icon_input}/>
-                  <input className={style.input} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter  email' required/>
-                </div>
-
-                <div className={style.div_input}>
-                  <FaUnlockAlt className={style.icon_input}/>
-                  <input className={style.input} type="password" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' required/>
-                </div>
-                                   
-                <input className={style.submit_btn} type="submit" value = {this.state.isLoading ? "Loading..." : "Log in"}  />
-
-              </form>
-
-              <p className={style.subtitle}>Don't have an account ?        
+        <div className={style.form_place}>
+          <h2 className={style.emblema}>B8 chat</h2>
+          <form className={style.form} onSubmit={this.loginToChat}>
+            <div className={style.div_input}>
+              <FaEnvelope className={style.icon_input} />
+              <input className={style.input} type="email" name="email" id="" value={this.props.email} onChange={this.handelChange} placeholder='Enter  email' required />
+            </div>
+            <div className={style.div_input}>
+              <FaUnlockAlt className={style.icon_input} />
+              <input className={style.input} type="password" name="password" value={this.props.password} onChange={this.handelChange} placeholder='Enter password' required />
+            </div>
+            <input className={style.submit_btn} type="submit" value={this.state.isLoading ? "Loading..." : "Log in"} />
+          </form>
+          <p className={style.subtitle}>Don't have an account ?
                 <NavLink className={style.subtitle_navlink} to='/registration' onClick={this.props.clearError}>Registration</NavLink>
-              </p>
-
-                <p className={style.error}>
-                  {this.props.error && this.props.error}
-                </p>
-
+          </p>
+          <p className={style.error}>
+            {this.props.error && this.props.error}
+          </p>
         </div>
       </div>
     )

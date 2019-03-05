@@ -3,13 +3,12 @@ import style from './LinkPanel.module.css';
 import Modal from '../ModalLinkPanel/ModalLinkPanel';
 import linkPanel_figure from '../img/linkPanel_figure.png';
 import linkPanel_add from '../img/linkPanel_add.png';
-import { FaGoogle, FaLinkedinIn, FaFacebookSquare, FaTrello, FaGoogleDrive, FaCalendarAlt, FaEnvelope, FaMusic, FaFileImage, FaTimes } from 'react-icons/fa';
-import {connect} from 'react-redux';
+import { FaGoogle, FaLinkedinIn, FaFacebookSquare, FaTrello, FaGoogleDrive, FaCalendarAlt, FaEnvelope, FaMusic, FaFileImage } from 'react-icons/fa';
+import { connect } from 'react-redux';
 import { MdStar } from "react-icons/md";
 import uuidv4 from 'uuid/v4';
 import deleteIcon from '../img/delete_blue.svg';
 import { updateCurrentUser } from '../redux/actions/currentUserAction';
-// import { IconContext } from "react-icons";
 
 class LinkPanel extends Component {
 
@@ -22,52 +21,52 @@ class LinkPanel extends Component {
     links: this.props.currentUser.links,
     iconPack: [
       {
-        url: <FaGoogle className={style.global}/>,
+        url: <FaGoogle className={style.global} />,
         id: 1,
         iconName: 'FaGoogle',
       },
       {
-        url: <FaLinkedinIn className={style.global}/>,
+        url: <FaLinkedinIn className={style.global} />,
         id: 2,
         iconName: 'FaLinkedinIn',
       },
       {
-        url: <FaFacebookSquare className={style.global}/>,
+        url: <FaFacebookSquare className={style.global} />,
         id: 3,
         iconName: 'FaFacebookSquare',
       },
       {
-        url: <FaTrello className={style.global}/>,
+        url: <FaTrello className={style.global} />,
         id: 4,
         iconName: 'FaTrello',
       },
       {
-        url: <FaGoogleDrive className={style.global}/>,
+        url: <FaGoogleDrive className={style.global} />,
         id: 5,
         iconName: 'FaGoogleDrive',
       },
       {
-        url: <FaCalendarAlt className={style.global}/>,
+        url: <FaCalendarAlt className={style.global} />,
         id: 6,
         iconName: 'FaCalendarAlt',
       },
       {
-        url: <FaEnvelope className={style.global}/>,
+        url: <FaEnvelope className={style.global} />,
         id: 7,
         iconName: 'FaEnvelope',
       },
       {
-        url: <MdStar className={style.global}/>,
+        url: <MdStar className={style.global} />,
         id: 8,
         iconName: 'MdStar',
       },
       {
-        url: <FaMusic className={style.global}/>,
+        url: <FaMusic className={style.global} />,
         id: 9,
         iconName: 'FaMusic',
       },
       {
-        url: <FaFileImage className={style.global}/>,
+        url: <FaFileImage className={style.global} />,
         id: 10,
         iconName: 'FaFileImage',
       }
@@ -98,26 +97,7 @@ class LinkPanel extends Component {
     }))
   };
 
-  // addLinkToArr = () => {
-  //   let linksAdd = {
-  //     linkName: this.state.modalInputName,
-  //     url: this.state.modalInputLink,
-  //     iconName: this.state.iconName,
-  //     linkId: uuidv4(),
-  //   }
-  //   this.setState(prev =>({
-  //     links: [...prev.links, linksAdd]
-  //   }));
-  // };
-
-  // deleteLinkFromArr = (e) =>{
-  //   let linkId = e.target.id;
-  //   this.setState(prev =>({
-  //     links: [...prev.links.filter(el => el.linkId !== linkId)],
-  //   }));
-  // };
-
-  isFormEmpty = ({modalInputName, modalInputLink, iconName}) => {
+  isFormEmpty = ({ modalInputName, modalInputLink, iconName }) => {
     return !modalInputName.length || !modalInputLink.length || !iconName.length;
   }
 
@@ -131,30 +111,29 @@ class LinkPanel extends Component {
     let newLinks = [];
 
     if (this.props.currentUser.links) {
-        let userLinks = this.props.currentUser.links;
-        newLinks= [...userLinks, link]
+      let userLinks = this.props.currentUser.links;
+      newLinks = [...userLinks, link]
     } else {
-      newLinks=[link];
+      newLinks = [link];
     }
     let sendToDB = {
       userEmail: this.props.currentUser.email,
       link: newLinks,
     }
-    // console.log(sendToDB);
     this.props.updateCurrentUser(newLinks);
-    window.socket.emit("user-change-link", (sendToDB)); 
+    window.socket.emit("user-change-link", (sendToDB));
   }
 
-  deleteUserLink =(e)=>{
+  deleteUserLink = (e) => {
     let linkId = e.target.id;
     let userLinks = this.props.currentUser.links;
-    let filterUserLinks = userLinks.filter(el=>el.linkId!==linkId);
+    let filterUserLinks = userLinks.filter(el => el.linkId !== linkId);
     let sendToDB = {
       userEmail: this.props.currentUser.email,
       link: filterUserLinks,
     }
     this.props.updateCurrentUser(filterUserLinks);
-    window.socket.emit("user-change-link", (sendToDB))    
+    window.socket.emit("user-change-link", (sendToDB))
   }
 
   changeFunction = () => {
@@ -165,36 +144,37 @@ class LinkPanel extends Component {
   };
 
   render() {
-    const { showModal, modalInputName, modalInputLink, imgActive, links, iconPack } = this.state
+    const { showModal, modalInputName, modalInputLink, imgActive, iconPack } = this.state
     return (
       <div className={this.props.toggleLinkPanel ? style.linkPanel_container : style.linkPanel_container_none}>
         <div className={style.link_height}>
           <div className={style.icons}>
-            {this.props.currentUser.links.map(el => 
+
+            {this.props.currentUser.links.map(el =>
               <div key={el.linkId} className={style.link_place}>
-               <a className={style.link} title={el.linkName} href={el.url} target='_blank' rel="noopener noreferrer">
-                {iconPack.find(item => item.iconName === el.iconName).url}
+                <a className={style.link} title={el.linkName} href={el.url} target='_blank' rel="noopener noreferrer">
+                  {iconPack.find(item => item.iconName === el.iconName).url}
                 </a>
-                <img id={el.linkId} onClick={this.deleteUserLink} className={style.delete} src={deleteIcon} alt="deleteIcon"/>
+                <img id={el.linkId} onClick={this.deleteUserLink} className={style.delete} src={deleteIcon} alt="deleteIcon" />
                 <img className={style.panel_line} src={linkPanel_figure} alt="figure" />
               </div>
             )}
 
           </div>
           <div className={style.panel_add} onClick={this.toggleModal}>
-            <img src={linkPanel_add} alt="add" className={style.button}/>
+            <img src={linkPanel_add} alt="add" className={style.button} />
           </div>
         </div>
         {showModal && <Modal toggleModal={this.toggleModal} changeFunction={this.changeFunction} name={'Add new channel'} imgActive={imgActive} modalInputLink={modalInputLink} modalInputName={modalInputName}>
           {/* <form> */}
-            <input required className={style.modalInput} value={modalInputName} onChange={this.handleChange} type="text" name='modalInputName' placeholder='Enter name of link url ' />
-            <input required className={style.modalInput} value={modalInputLink} onChange={this.handleChange} type="text" name='modalInputLink' placeholder='Enter link url' />
-            <h4>Choose the icon:</h4>
-            <ul className={style.card}>
-              {this.state.iconPack.map( el => 
+          <input required className={style.modalInput} value={modalInputName} onChange={this.handleChange} type="text" name='modalInputName' placeholder='Enter name of link url ' />
+          <input required className={style.modalInput} value={modalInputLink} onChange={this.handleChange} type="text" name='modalInputLink' placeholder='Enter link url' />
+          <h4>Choose the icon:</h4>
+          <ul className={style.card}>
+            {this.state.iconPack.map(el =>
               <li onClick={() => this.activeSvg(el.id)} key={el.id} className={imgActive === el.id ? `${style.svgLink}` : `${style.svgFalse}`}>{el.url}
               </li>)}
-            </ul>
+          </ul>
           {/* </form> */}
         </Modal>}
       </div>
@@ -202,21 +182,17 @@ class LinkPanel extends Component {
   }
 }
 
-function MSTP (state) {
+function MSTP(state) {
   return {
-      // allChannels: state.allChannels,
-      // allUsers: state.allUsers,
-      // currentChannel: state.currentChannel,
-      currentUser : state.currentUser,
-      // clientId : state.clientId,
+    currentUser: state.currentUser,
   }
 }
 
-function MDTP (dispatch) {
+function MDTP(dispatch) {
   return {
-    updateCurrentUser: function (data){
-          dispatch(updateCurrentUser(data))
-      }
+    updateCurrentUser: function (data) {
+      dispatch(updateCurrentUser(data))
+    }
   }
 }
 

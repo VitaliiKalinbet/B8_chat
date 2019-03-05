@@ -5,6 +5,7 @@ import Channels from '../channels/channels';
 import DirectMessages from '../directMessages/directMessages';
 
 export default class SidePanel extends Component {
+  
   state = {
     activeItemId: 'General',
   }
@@ -21,9 +22,9 @@ export default class SidePanel extends Component {
     return (
       <div className={this.props.toggleSidePanel ? style.sidePanel : style.sidePanelNone}>
         <p className={style.title}>B8 chat</p>
-        <UserPanel/>
-        <Channels setActiveItemId = {this.setActiveItemId} getActiveItemId = {this.getActiveItemId}/>
-        <DirectMessages setActiveItemId = {this.setActiveItemId} getActiveItemId = {this.getActiveItemId}/>
+        <UserPanel />
+        <Channels setActiveItemId={this.setActiveItemId} getActiveItemId={this.getActiveItemId} />
+        <DirectMessages setActiveItemId={this.setActiveItemId} getActiveItemId={this.getActiveItemId} />
       </div>
     )
   }
